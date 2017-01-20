@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1484859551 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
+	<stdio.h>
+
+1484866943 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+	"arithmeticEvaluator.h"
+	<stdio.h>
+
+1484864643 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
+
+1484866419 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+	<stdio.h>
+
