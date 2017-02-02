@@ -4,10 +4,8 @@
 int main(){
     char* postfix;
     char* infixedUserInput = getKeyboardInput();
-
     convertToPostfix(infixedUserInput);
     printCharacterStack(operatorStack);
-
-
+    printDoubleStack(operandStack);
     return 0;
 }

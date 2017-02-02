@@ -12,9 +12,9 @@ void printCharacterArray(char* arrayToBePrinted){
 }
 
 void printDoubleArray(double* arrayToBePrinted, int sizeOfArray){
-    for(int i = 0; arrayToBePrinted[i] < 3; i++)
+    for(int i = 0; i < sizeOfArray; i++)
     {
-        printf("%d%s", arrayToBePrinted[i], withinArraySeperator);
+        printf("%f%s", arrayToBePrinted[i], withinArraySeperator);
     }
 }
 
@@ -30,15 +30,15 @@ void printCharacterStack(struct CharStack stackToBePrinted){
     printCharacterArray(characterArrayToBePrinted);
 }
 
-void printDoubleStack(struct CharStack stackToBePrinted){
+void printDoubleStack(struct NumStack stackToBePrinted){
     int sizeOfStack = stackToBePrinted.stackPointer;
-    double characterArrayToBePrinted[MAX_STACK_SIZE];
+    double numberArrayToBePrinted[MAX_STACK_SIZE];
     int i = 0;
     for(i; i < sizeOfStack; i++)
     {
-        characterArrayToBePrinted[i] = stackToBePrinted.stackValue[i];
+        numberArrayToBePrinted[i] = stackToBePrinted.stackValue[i];
     }
-    printCharacterArray(characterArrayToBePrinted);
+    printDoubleArray(numberArrayToBePrinted, sizeOfStack);
 }
 
 char* getKeyboardInput(void){

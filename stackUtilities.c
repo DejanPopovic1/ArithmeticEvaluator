@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "arithmeticEvaluator.h"
 
 #define MAX_STACK_SIZE 100

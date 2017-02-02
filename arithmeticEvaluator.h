@@ -18,9 +18,14 @@ struct NumStack{
 
 void pushChar(struct CharStack *, char pushedValue);
 char popChar(struct CharStack);
+void pushNum(struct NumStack *, double);
+double popNum(struct NumStack);
 
 void printCharacterArray(char*);
 void printCharacterStack(struct CharStack);
+void printDoubleArray(double*, int);
+void printDoubleStack(struct NumStack);
+
 char* getKeyboardInput(void);
 char getToken(char **);
 

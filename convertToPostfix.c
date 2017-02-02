@@ -7,9 +7,10 @@
 void convertToPostfix(char *infix){
     char token;
     while((token = getToken(&infix)) != '\0'){
+            //printf("%f", (double)(token - '0'));
             if(isdigit(token))
             {
-                pushNum(&operandStack, token);
+                pushNum(&operandStack, (double)(token - '0'));
             }
             else if(token == CLOSING_PARENTHESIS)
             {
