@@ -1,19 +1,19 @@
 # depslib dependency file v1.0
-1485710675 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
+1486049062 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
 	<stdio.h>
 	"arithmeticEvaluator.h"
 
-1485710051 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1486048026 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 
-1485710062 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
+1485716142 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 
-1485710258 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+1486046044 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	<stdio.h>
 	"arithmeticEvaluator.h"
 
-1485699122 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1486045753 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 	<stdlib.h>

@@ -2,12 +2,19 @@
 #include "arithmeticEvaluator.h"
 #define MEMORY_ALLOCATE 20
 
-const char* withinArraySeperator = "\n";
+const char* withinArraySeperator = "   ";
 
 void printCharacterArray(char* arrayToBePrinted){
     for(int i = 0; arrayToBePrinted[i] != '\0'; i++)
     {
-        printf("%c", arrayToBePrinted[i]);
+        printf("%c%s", arrayToBePrinted[i], withinArraySeperator);
+    }
+}
+
+void printDoubleArray(double* arrayToBePrinted, int sizeOfArray){
+    for(int i = 0; arrayToBePrinted[i] < 3; i++)
+    {
+        printf("%d%s", arrayToBePrinted[i], withinArraySeperator);
     }
 }
 
@@ -20,6 +27,17 @@ void printCharacterStack(struct CharStack stackToBePrinted){
         characterArrayToBePrinted[i] = stackToBePrinted.stackValue[i];
     }
     characterArrayToBePrinted[i] = '\0';
+    printCharacterArray(characterArrayToBePrinted);
+}
+
+void printDoubleStack(struct CharStack stackToBePrinted){
+    int sizeOfStack = stackToBePrinted.stackPointer;
+    double characterArrayToBePrinted[MAX_STACK_SIZE];
+    int i = 0;
+    for(i; i < sizeOfStack; i++)
+    {
+        characterArrayToBePrinted[i] = stackToBePrinted.stackValue[i];
+    }
     printCharacterArray(characterArrayToBePrinted);
 }
 

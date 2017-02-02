@@ -1,3 +1,6 @@
+#ifndef ARITHMETICEVALUATOR_H
+#define ARITHMETICEVALUATOR_H
+
 #define MAX_STACK_SIZE 100
 
 extern struct CharStack operatorStack;
@@ -22,3 +25,5 @@ char* getKeyboardInput(void);
 char getToken(char **);
 
 void convertToPostfix(char *);
+
+#endif

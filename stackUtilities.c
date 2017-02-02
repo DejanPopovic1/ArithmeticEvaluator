@@ -3,7 +3,7 @@
 
 #define MAX_STACK_SIZE 100
 
-struct CharStack operatorStack = {.stackPointer = 5, .stackValue = {'7','2','3','4','5'}};
+struct CharStack operatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
 void pushChar(struct CharStack *stack, char pushedValue){

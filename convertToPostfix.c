@@ -13,7 +13,7 @@ void convertToPostfix(char *infix){
             }
             else if(token == CLOSING_PARENTHESIS)
             {
-//              flushOperatorStackToNextParenthesis(&operandStack, &operatorStack);
+              /*flushOperatorStackToNextParenthesis(&operandStack, &operatorStack);*/
             }
             else if(!isdigit(token))
             {
