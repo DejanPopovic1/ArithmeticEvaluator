@@ -3,19 +3,21 @@
 	<stdio.h>
 	"arithmeticEvaluator.h"
 
-1486053026 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1486064248 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 
-1486053026 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
+1486064118 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 
-1486053026 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
-	<stdio.h>
-	<stdlib.h>
-	"arithmeticEvaluator.h"
-
-1486053026 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
-	"arithmeticEvaluator.h"
+1486063169 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	<stdio.h>
 	<stdlib.h>
+	"arithmeticEvaluator.h"
+
+1486060109 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+	"arithmeticEvaluator.h"
+	<stdio.h>
+	<stdlib.h>
+
+1486063922 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arrayutilities.c
 

@@ -5,6 +5,7 @@
 #define MAX_STACK_SIZE 100
 
 struct CharStack operatorStack = {.stackPointer = 0};
+struct CharStack swappedOperatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
 void pushChar(struct CharStack *stack, char pushedValue){
@@ -45,4 +46,12 @@ double popNum(struct NumStack stack){
         fprintf(stderr, "Number Stack empty\n");
         exit(-1);
     }
+}
+
+void swapCharStack(struct CharStack *unSwappedStack){
+    //struct CharStack swappedStack;
+    struct CharStack temporarySwappedStack = {.stackPointer = 0};
+    char swappedElement = popChar(*unSwappedStack);
+    pushChar(&temporarySwappedStack, swappedElement);
+
 }

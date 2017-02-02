@@ -4,6 +4,7 @@
 #define MAX_STACK_SIZE 100
 
 extern struct CharStack operatorStack;
+extern struct CharStack SwappedOperatorStack;
 extern struct NumStack operandStack;
 
 struct CharStack{
@@ -15,6 +16,8 @@ struct NumStack{
     double stackValue[MAX_STACK_SIZE];
     int stackPointer;
 };
+
+void swapDoubleArray(double *, int);
 
 void pushChar(struct CharStack *, char pushedValue);
 char popChar(struct CharStack);
@@ -29,6 +32,6 @@ void printDoubleStack(struct NumStack);
 char* getKeyboardInput(void);
 char getToken(char **);
 
-void convertToPostfix(char *);
+void createPostfixStacks(char *);
 
 #endif
