@@ -1,14 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "arithmeticEvaluator.h"
 #define MEMORY_ALLOCATE 20
 
 const char* withinArraySeperator = "   ";
+const char* interArraySeperator = "\n";
 
 void printCharacterArray(char* arrayToBePrinted){
     for(int i = 0; arrayToBePrinted[i] != '\0'; i++)
     {
         printf("%c%s", arrayToBePrinted[i], withinArraySeperator);
     }
+    printf("%s", interArraySeperator);
 }
 
 void printDoubleArray(double* arrayToBePrinted, int sizeOfArray){

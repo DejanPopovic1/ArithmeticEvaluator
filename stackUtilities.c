@@ -49,9 +49,10 @@ double popNum(struct NumStack stack){
 }
 
 void swapCharStack(struct CharStack *unSwappedStack){
+    swapDoubleArray(unSwappedStack -> stackValue, unSwappedStack -> stackPointer);
     //struct CharStack swappedStack;
-    struct CharStack temporarySwappedStack = {.stackPointer = 0};
-    char swappedElement = popChar(*unSwappedStack);
-    pushChar(&temporarySwappedStack, swappedElement);
+    //struct CharStack temporarySwappedStack = {.stackPointer = 0};
+    //char swappedElement = popChar(*unSwappedStack);
+    //pushChar(&temporarySwappedStack, swappedElement);
 
 }

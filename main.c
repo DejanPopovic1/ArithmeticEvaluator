@@ -3,12 +3,14 @@
 
 int main(){
     char* postfix;
-    char* infixedUserInput = getKeyboardInput();
-    createPostfixStacks(infixedUserInput);
-    double myArray [5] = {1.00, 2.00, 5.00, 7, 9};
-    swapDoubleArray(&myArray, 5);
-    printDoubleArray(myArray, 5);
+    //char* infixedUserInput = getKeyboardInput();
+    //createPostfixStacks(infixedUserInput);
+    pushChar(&operatorStack, '-');
+    pushChar(&operatorStack, '+');
+    pushChar(&operatorStack, '*');
+    pushChar(&operatorStack, '/');
     printCharacterStack(operatorStack);
-    printDoubleStack(operandStack);
+    swapCharStack(&operatorStack);
+    printCharacterStack(operatorStack);
     return 0;
 }

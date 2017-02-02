@@ -28,6 +28,7 @@ void printCharacterArray(char*);
 void printCharacterStack(struct CharStack);
 void printDoubleArray(double*, int);
 void printDoubleStack(struct NumStack);
+//void swapCharStack(struct CharStack *);
 
 char* getKeyboardInput(void);
 char getToken(char **);
