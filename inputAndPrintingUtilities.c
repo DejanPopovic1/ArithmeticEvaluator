@@ -27,7 +27,7 @@ void printCharacterStack(struct CharStack stackToBePrinted){
     int i = 0;
     for(i; i < sizeOfStack; i++)
     {
-        characterArrayToBePrinted[i] = stackToBePrinted.stackValue[i];
+        characterArrayToBePrinted[i] = stackToBePrinted.stackValues[i];
     }
     characterArrayToBePrinted[i] = '\0';
     printCharacterArray(characterArrayToBePrinted);
@@ -39,7 +39,7 @@ void printDoubleStack(struct NumStack stackToBePrinted){
     int i = 0;
     for(i; i < sizeOfStack; i++)
     {
-        numberArrayToBePrinted[i] = stackToBePrinted.stackValue[i];
+        numberArrayToBePrinted[i] = stackToBePrinted.stackValues[i];
     }
     printDoubleArray(numberArrayToBePrinted, sizeOfStack);
 }

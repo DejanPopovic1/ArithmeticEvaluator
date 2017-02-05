@@ -8,12 +8,12 @@ extern struct CharStack SwappedOperatorStack;
 extern struct NumStack operandStack;
 
 struct CharStack{
-    char stackValue[MAX_STACK_SIZE];
+    char stackValues[MAX_STACK_SIZE];
     int stackPointer;
 };
 
 struct NumStack{
-    double stackValue[MAX_STACK_SIZE];
+    double stackValues[MAX_STACK_SIZE];
     int stackPointer;
 };
 

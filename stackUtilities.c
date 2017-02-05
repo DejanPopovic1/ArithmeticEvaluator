@@ -10,7 +10,7 @@ struct NumStack operandStack = {.stackPointer = 0};
 
 void pushChar(struct CharStack *stack, char pushedValue){
     if (stack -> stackPointer < MAX_STACK_SIZE) {
-        stack -> stackValue[stack -> stackPointer++] = pushedValue;
+        stack -> stackValues[stack -> stackPointer++] = pushedValue;
     }
     else {
         fprintf(stderr, "Character Stack full, can't push %g\n", pushedValue);
@@ -20,7 +20,7 @@ void pushChar(struct CharStack *stack, char pushedValue){
 
 char popChar(struct CharStack stack){
     if (stack.stackPointer > 0){
-        return stack.stackValue[--stack.stackPointer];
+        return stack.stackValues[--stack.stackPointer];
     }
     else {
         fprintf(stderr, "Character Stack empty\n");
@@ -30,7 +30,7 @@ char popChar(struct CharStack stack){
 
 void pushNum(struct NumStack *stack, double pushedValue){
     if (stack -> stackPointer < MAX_STACK_SIZE) {
-        stack -> stackValue[stack -> stackPointer++] = pushedValue;
+        stack -> stackValues[stack -> stackPointer++] = pushedValue;
     }
     else {
         fprintf(stderr, "Number Stack full, can't push %g\n", pushedValue);
@@ -40,7 +40,7 @@ void pushNum(struct NumStack *stack, double pushedValue){
 
 double popNum(struct NumStack stack){
     if (stack.stackPointer > 0){
-        return stack.stackValue[--stack.stackPointer];
+        return stack.stackValues[--stack.stackPointer];
     }
     else {
         fprintf(stderr, "Number Stack empty\n");
@@ -49,7 +49,7 @@ double popNum(struct NumStack stack){
 }
 
 void swapCharStack(struct CharStack *unSwappedStack){
-    swapCharArray(unSwappedStack -> stackValue, unSwappedStack -> stackPointer);
+    swapCharArray(unSwappedStack -> stackValues, unSwappedStack -> stackPointer);
     printCharacterStack(operatorStack);
     //struct CharStack swappedStack;
     //struct CharStack temporarySwappedStack = {.stackPointer = 0};

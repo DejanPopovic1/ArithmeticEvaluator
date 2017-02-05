@@ -4,11 +4,13 @@
 int main(){
     char* postfix;
     char* infixedUserInput = getKeyboardInput();
-    pushChar(&operatorStack, '-');
-    pushChar(&operatorStack, '+');
-    pushChar(&operatorStack, '*');
-    pushChar(&operatorStack, '/');
+    createPostfixStacks(infixedUserInput);
+    //pushChar(&operatorStack, '-');
+    //pushChar(&operatorStack, '+');
+    //pushChar(&operatorStack, '*');
+    //pushChar(&operatorStack, '/');
     printCharacterStack(operatorStack);
-    swapCharStack(&operatorStack);
+    printDoubleStack(operandStack);
+    //swapCharStack(&operatorStack);
     return 0;
 }
