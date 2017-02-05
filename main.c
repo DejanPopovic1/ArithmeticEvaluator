@@ -3,14 +3,12 @@
 
 int main(){
     char* postfix;
-    //char* infixedUserInput = getKeyboardInput();
-    //createPostfixStacks(infixedUserInput);
+    char* infixedUserInput = getKeyboardInput();
     pushChar(&operatorStack, '-');
     pushChar(&operatorStack, '+');
     pushChar(&operatorStack, '*');
     pushChar(&operatorStack, '/');
     printCharacterStack(operatorStack);
     swapCharStack(&operatorStack);
-    printCharacterStack(operatorStack);
     return 0;
 }

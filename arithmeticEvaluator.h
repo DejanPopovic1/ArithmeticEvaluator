@@ -18,6 +18,7 @@ struct NumStack{
 };
 
 void swapDoubleArray(double *, int);
+void swapCharArray(double *, int sizeOfArray);
 
 void pushChar(struct CharStack *, char pushedValue);
 char popChar(struct CharStack);
