@@ -19,6 +19,7 @@ void printDoubleArray(double* arrayToBePrinted, int sizeOfArray){
     {
         printf("%f%s", arrayToBePrinted[i], withinArraySeperator);
     }
+    printf("%s", interArraySeperator);
 }
 
 void printCharacterStack(struct CharStack stackToBePrinted){

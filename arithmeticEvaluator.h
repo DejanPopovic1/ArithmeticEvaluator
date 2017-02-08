@@ -21,9 +21,10 @@ void swapDoubleArray(double *, int);
 void swapCharArray(double *, int sizeOfArray);
 
 void pushChar(struct CharStack *, char pushedValue);
-char popChar(struct CharStack);
+char popChar(struct CharStack *);
 void pushNum(struct NumStack *, double);
-double popNum(struct NumStack);
+double popNum(struct NumStack *);
+void computeStacks(struct CharStack *, struct NumStack *);
 
 void printCharacterArray(char*);
 void printCharacterStack(struct CharStack);
@@ -35,5 +36,13 @@ char* getKeyboardInput(void);
 char getToken(char **);
 
 void createPostfixStacks(char *);
+
+double add(double, double);
+double subtract(double, double);
+double multiply(double, double);
+double divide(double, double);
+
+
+
 
 #endif

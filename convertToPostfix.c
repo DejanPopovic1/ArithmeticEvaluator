@@ -13,12 +13,12 @@ void createPostfixStacks(char *infix){
             }
             else if(token == CLOSING_PARENTHESIS)
             {
-              /*flushOperatorStackToNextParenthesis(&operandStack, &operatorStack);*/
+              computeStacks(&operatorStack, &operandStack);
             }
             else if(!isdigit(token))
             {
                 pushChar(&operatorStack, token);
             }
     }
-
 }
+
