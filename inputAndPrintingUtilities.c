@@ -69,3 +69,7 @@ char getToken(char **inputString){
     *inputString = *inputString + 1;    //Still have to free memory
     return returnCharacter;
 }
+
+char peekToken(char *inputString){
+    return inputString[0];
+}

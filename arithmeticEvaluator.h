@@ -1,6 +1,7 @@
 #ifndef ARITHMETICEVALUATOR_H
 #define ARITHMETICEVALUATOR_H
 
+#include <stdbool.h>
 #define MAX_STACK_SIZE 100
 
 extern struct CharStack operatorStack;
@@ -25,6 +26,8 @@ char popChar(struct CharStack *);
 void pushNum(struct NumStack *, double);
 double popNum(struct NumStack *);
 void computeStacks(struct CharStack *, struct NumStack *);
+char peekChar(struct CharStack);
+void computeStacksSinglePass(struct CharStack *, struct NumStack *);
 
 void printCharacterArray(char*);
 void printCharacterStack(struct CharStack);
@@ -34,6 +37,7 @@ void printDoubleStack(struct NumStack);
 
 char* getKeyboardInput(void);
 char getToken(char **);
+char peekToken(char *);
 
 void createPostfixStacks(char *);
 
@@ -42,7 +46,8 @@ double subtract(double, double);
 double multiply(double, double);
 double divide(double, double);
 
-
+bool isNextStackElementGreaterOrEqualPrecedanceThanToken(char, struct CharStack);
+bool isGreaterOrEqualPrecedance(char, char);
 
 
 #endif

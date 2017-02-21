@@ -28,6 +28,13 @@ char popChar(struct CharStack *stack){
     }
 }
 
+char peekChar(struct CharStack stack){
+    if(!stack.stackPointer){
+        return '\0';
+    }
+    return stack.stackValues[stack.stackPointer - 1];
+}
+
 void pushNum(struct NumStack *stack, double pushedValue){
     if (stack -> stackPointer < MAX_STACK_SIZE) {
         stack -> stackValues[stack -> stackPointer++] = pushedValue;
@@ -52,39 +59,40 @@ void swapCharStack(struct CharStack *unSwappedStack){
     swapCharArray(unSwappedStack -> stackValues, unSwappedStack -> stackPointer);
 }
 
-void computeStacks(struct CharStack *operatorStack, struct NumStack *operandStack){
-
-
-
-
+//Undefinned reference to this function if it is included below computeStack
+void computeStacksSinglePass(struct CharStack *operatorStack, struct NumStack *operandStack){
     double result;
-    double firstOperand;
-    double secondOperand;
     char operatorCharacter = '\0';
-    //while(/*operatorCharacter != '(' || *//*operatorStack -> stackPointer > 0*/)
-            {
-        secondOperand = popNum(operandStack);
-        firstOperand = popNum(operandStack);
-        operatorCharacter = popChar(operatorStack);
+    double secondOperand = popNum(operandStack);
+    double firstOperand = popNum(operandStack);
+    operatorCharacter = popChar(operatorStack);
+    switch(operatorCharacter){
+        case '+':
+            result = add(firstOperand, secondOperand);
+            break;
+        case '-':
+            result = subtract(firstOperand, secondOperand);
+            break;
+        case '*':
+            result = multiply(firstOperand, secondOperand);
+            break;
+        case '/':
+            result = divide(firstOperand, secondOperand);
+            break;
+    }
+    pushNum(operandStack, result);
+}
 
-
-
-
-
-        switch(operatorCharacter){
-            case '+':
-                result = add(firstOperand, secondOperand);
-                break;
-            case '-':
-                result = subtract(firstOperand, secondOperand);
-                break;
-            case '*':
-                result = multiply(firstOperand, secondOperand);
-                break;
-            case '/':
-                result = divide(firstOperand, secondOperand);
-                break;
-            }
-            //pushNum(&operandStack, result);
+void computeStacks(struct CharStack *operatorStack, struct NumStack *operandStack){
+    if (peekChar(*operatorStack) != '('){
+        computeStacksSinglePass(operatorStack, operandStack);
+    }
+    else if (peekChar(*operatorStack) == '('){
+        operatorStack -> stackPointer--;
+        operatorStack -> stackPointer--;
+        while (peekChar(*operatorStack) != ')'){
+            computeStacksSinglePass(&operatorStack, &operandStack);
+        }
+        operatorStack -> stackPointer--;
     }
 }

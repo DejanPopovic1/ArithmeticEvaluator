@@ -12,6 +12,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c99" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -31,6 +32,25 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="arithmeticEvaluator.h" />
+		<Unit filename="arrayUtilities.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="convertToPostfix.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="inputAndPrintingUtilities.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mathUtilities.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stackUtilities.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
