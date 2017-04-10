@@ -2,7 +2,8 @@
 #define ARITHMETICEVALUATOR_H
 
 #include <stdbool.h>
-#define MAX_STACK_SIZE 100
+#define MAX_STACK_SIZE 200
+#define STACK_EMPTY E
 
 extern struct CharStack operatorStack;
 extern struct CharStack SwappedOperatorStack;
@@ -45,9 +46,9 @@ double add(double, double);
 double subtract(double, double);
 double multiply(double, double);
 double divide(double, double);
+double exponentiate(double, double);
 
-bool isNextStackElementGreaterOrEqualPrecedanceThanToken(char, struct CharStack);
-bool isGreaterOrEqualPrecedance(char, char);
-
+bool isTokenLessThanOrEqualTopStackElement(char, struct CharStack);
+bool isFirstLessThanOrEqualSecond(char, char);
 
 #endif

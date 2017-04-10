@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "arithmeticEvaluator.h"
 
-#define MAX_STACK_SIZE 100
+#define MAX_STACK_SIZE 200
 
 struct CharStack operatorStack = {.stackPointer = 0};
 struct CharStack swappedOperatorStack = {.stackPointer = 0};
@@ -30,7 +30,7 @@ char popChar(struct CharStack *stack){
 
 char peekChar(struct CharStack stack){
     if(!stack.stackPointer){
-        return '\0';
+        return 'STACK_EMPTY';
     }
     return stack.stackValues[stack.stackPointer - 1];
 }
@@ -78,6 +78,9 @@ void computeStacksSinglePass(struct CharStack *operatorStack, struct NumStack *o
             break;
         case '/':
             result = divide(firstOperand, secondOperand);
+            break;
+        case '^':
+            result = exponentiate(firstOperand, secondOperand);
             break;
     }
     pushNum(operandStack, result);

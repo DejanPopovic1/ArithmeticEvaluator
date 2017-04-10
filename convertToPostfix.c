@@ -21,60 +21,42 @@ enum PRECEDENCE{
 
 void createPostfixStacks(char *infix){
     char token;
-    while((token = getToken(&infix)) != '\0'){
+    double number;
+    while((token = getToken(&infix)) != '\0')
+    {
         if(isdigit(token))
         {
-//            if(isNextStackElementGreaterOrEqualPrecedanceThanToken(token, operatorStack)){
-//                computeStacks(&operatorStack, &operandStack);
-//                pushChar(&operatorStack, token);
-//            }
-//            else
-//            {
-                    //pushNum(&operandStack, (double)(token - '0'));
-
-
-                    pushNum(&operandStack, (double)(token - '0'));
-
-
-//            }
+            pushNum(&operandStack, (double)(token - '0'));
+            printf("%d ",operandStack.stackPointer);
         }
-        else if(token == ')'){
-            pushChar(&operatorStack, token);
-            //computeStacks(&operatorStack, &operandStack);
-        }
-        else if(!isdigit(token))
+        else
         {
-            if(token == '+')
+            while(isTokenLessThanOrEqualTopStackElement(token, operatorStack))
             {
-                char peekedToken = getToken(&infix);
-                pushNum(&operandStack, (double)(peekedToken - '0'));
-                pushChar(&operatorStack, token);
+                computeStacksSinglePass(&operatorStack, &operandStack);
             }
-            else if (token == '-')
-            {
-                char peekedToken = getToken(&infix);
-                pushNum(&operandStack, (-1)*(double)(peekedToken - '0'));
-                pushChar(&operatorStack, '+');
-            }
-
+            pushChar(&operatorStack, token);
         }
     }
-    //Flush the remaining stacks
 
-    while(operatorStack.stackPointer > 0){
-        computeStacks(&operatorStack, &operandStack);
-//
+    while(operatorStack.stackPointer > 0)
+    {
+        computeStacksSinglePass(&operatorStack, &operandStack);
     }
 }
 
-bool isNextStackElementGreaterOrEqualPrecedanceThanToken(char comparitor, struct CharStack operatorStack){
+bool isTokenLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
     char peekedCharacter = peekChar(operatorStack);
-    return isGreaterOrEqualPrecedance(comparitor, peekedCharacter);
+    if(peekedCharacter == 'STACK_EMPTY')
+    {
+        return false;
+    }
+    return isFirstLessThanOrEqualSecond(comparitor, peekedCharacter);
 }
 
-bool isGreaterOrEqualPrecedance(char comparitor, char peekedCharacter){
-    unsigned short result;
-    switch(comparitor){
+bool isFirstLessThanOrEqualSecond(char a, char b){
+    short result;
+    switch(a){
         case '+':
             result = ADDITION;
             break;
@@ -87,8 +69,11 @@ bool isGreaterOrEqualPrecedance(char comparitor, char peekedCharacter){
         case '/':
             result = DIVISION;
             break;
+        case '^':
+            result = EXPONENTIATION;
+            break;
     }
-    switch(peekedCharacter){
+    switch(b){
         case '+':
             result -= ADDITION;
             break;
@@ -101,11 +86,16 @@ bool isGreaterOrEqualPrecedance(char comparitor, char peekedCharacter){
         case '/':
             result -= DIVISION;
             break;
+        case '^':
+            result -= EXPONENTIATION;
+            break;
     }
-    if (result > 0){
+    if (result > 0)
+    {
         return false;
     }
-    else {
+    else
+    {
         return true;
     }
 }
