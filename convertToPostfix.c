@@ -27,7 +27,18 @@ void createPostfixStacks(char *infix){
         if(isdigit(token))
         {
             pushNum(&operandStack, (double)(token - '0'));
-            printf("%d ",operandStack.stackPointer);
+        }
+        else if(token == '(')
+        {
+            pushChar(&operatorStack, token);
+        }
+        else if(token == ')')
+        {
+            while(peekChar(operatorStack) != '(')
+            {
+                computeStacksSinglePass(&operatorStack, &operandStack);
+            }
+            popChar(&operatorStack);
         }
         else
         {
@@ -38,7 +49,6 @@ void createPostfixStacks(char *infix){
             pushChar(&operatorStack, token);
         }
     }
-
     while(operatorStack.stackPointer > 0)
     {
         computeStacksSinglePass(&operatorStack, &operandStack);
