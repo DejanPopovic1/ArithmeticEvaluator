@@ -4,7 +4,8 @@
 int main(){
     char* infixedUserInput = getKeyboardInput();
     printf("\n");
-    createPostfixStacks(infixedUserInput);
+    calculateArithmeticExpression(infixedUserInput);
     printDoubleStack(operandStack);
+    free(infixedUserInput);
     return 0;
 }

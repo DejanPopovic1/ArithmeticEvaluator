@@ -7,16 +7,14 @@ const char* withinArraySeperator = "   ";
 const char* interArraySeperator = "\n";
 
 void printCharacterArray(char* arrayToBePrinted){
-    for(int i = 0; arrayToBePrinted[i] != '\0'; i++)
-    {
+    for(int i = 0; arrayToBePrinted[i] != '\0'; i++) {
         printf("%c%s", arrayToBePrinted[i], withinArraySeperator);
     }
     printf("%s", interArraySeperator);
 }
 
 void printDoubleArray(double* arrayToBePrinted, int sizeOfArray){
-    for(int i = 0; i < sizeOfArray; i++)
-    {
+    for(int i = 0; i < sizeOfArray; i++) {
         printf("%f%s", arrayToBePrinted[i], withinArraySeperator);
     }
     printf("%s", interArraySeperator);
@@ -25,9 +23,8 @@ void printDoubleArray(double* arrayToBePrinted, int sizeOfArray){
 void printCharacterStack(struct CharStack stackToBePrinted){
     int sizeOfStack = stackToBePrinted.stackPointer;
     char characterArrayToBePrinted[MAX_STACK_SIZE];
-    int i = 0;
-    for(i; i < sizeOfStack; i++)
-    {
+    int i;
+    for(i = 0; i < sizeOfStack; i++) {
         characterArrayToBePrinted[i] = stackToBePrinted.stackValues[i];
     }
     characterArrayToBePrinted[i] = '\0';
@@ -37,23 +34,22 @@ void printCharacterStack(struct CharStack stackToBePrinted){
 void printDoubleStack(struct NumStack stackToBePrinted){
     int sizeOfStack = stackToBePrinted.stackPointer;
     double numberArrayToBePrinted[MAX_STACK_SIZE];
-    int i = 0;
-    for(i; i < sizeOfStack; i++)
-    {
+    int i;
+    for(i = 0; i < sizeOfStack; i++) {
         numberArrayToBePrinted[i] = stackToBePrinted.stackValues[i];
     }
     printDoubleArray(numberArrayToBePrinted, sizeOfStack);
 }
 
 char* getKeyboardInput(void){
-    char* input = malloc(sizeof(char) * MEMORY_ALLOCATE); //Still have to free memory
+    int i;
+    char inputCharacter;
+    char* input = malloc(sizeof(char) * MEMORY_ALLOCATE); //Remember to free memory in the caller
     if (input == NULL) {
         fprintf(stderr, "Failed to allocate memory.\n");
         exit(-1);
     }
-    int i;
-    char inputCharacter;
-    for(i = 0; i < MEMORY_ALLOCATE; i++){
+    for(i = 0; i < MEMORY_ALLOCATE; i++) {
         inputCharacter = getchar();
         if(inputCharacter == '\n'){
             break;
@@ -62,10 +58,4 @@ char* getKeyboardInput(void){
     }
     input[i] = '\0';
     return input;
-}
-
-char getToken(char **inputString){
-    char returnCharacter = **inputString;
-    *inputString = *inputString + 1;    //Still have to free memory
-    return returnCharacter;
 }

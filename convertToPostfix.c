@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define CLOSING_PARENTHESIS ')'
-
 enum PRECEDENCE{
     ADDITION = 1,
     SUBTRACTION = 1,
@@ -14,10 +12,27 @@ enum PRECEDENCE{
     BRACKETS = 4
 };
 
-void createPostfixStacks(char *infix){
+struct precedence{
+    char arithmeticOperator;
+    int precedence;
+};
+
+struct precedence precedenceArray[] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'\0', 1}};
+
+int linearSearch(char searchChar, struct precedence *arrayToSearch){
+    int i;
+    for(i = 0; arrayToSearch[i].arithmeticOperator != '\0'; i++) {
+        if(arrayToSearch[i].arithmeticOperator == searchChar) {
+            return arrayToSearch[i].precedence;
+        }
+    }
+    return -1;
+}
+
+void calculateArithmeticExpression(char *infix){
     char token;
     double number;
-    while((token = getToken(&infix)) != '\0') {
+    while((token = *infix++) != '\0') {
         if(isdigit(token)) {
             pushNum(&operandStack, (double)(token - '0'));
         }
@@ -26,19 +41,19 @@ void createPostfixStacks(char *infix){
         }
         else if(token == ')') {
             while(peekChar(operatorStack) != '(') {
-                computeStacksSinglePass(&operatorStack, &operandStack);
+                computeStack(&operatorStack, &operandStack);
             }
             popChar(&operatorStack);
         }
         else {
             while(isTokenLessThanOrEqualTopStackElement(token, operatorStack)) {
-                computeStacksSinglePass(&operatorStack, &operandStack);
+                computeStack(&operatorStack, &operandStack);
             }
             pushChar(&operatorStack, token);
         }
     }
     while(operatorStack.stackPointer > 0) {
-        computeStacksSinglePass(&operatorStack, &operandStack);
+        computeStack(&operatorStack, &operandStack);
     }
 }
 
@@ -51,40 +66,6 @@ bool isTokenLessThanOrEqualTopStackElement(char comparitor, struct CharStack ope
 }
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
-    short result;
-    switch(a){
-        case '+':
-            result = ADDITION;
-            break;
-        case '-':
-            result = SUBTRACTION;
-            break;
-        case '*':
-            result = MULTIPLICATION;
-            break;
-        case '/':
-            result = DIVISION;
-            break;
-        case '^':
-            result = EXPONENTIATION;
-            break;
-    }
-    switch(b){
-        case '+':
-            result -= ADDITION;
-            break;
-        case '-':
-            result -= SUBTRACTION;
-            break;
-        case '*':
-            result -= MULTIPLICATION;
-            break;
-        case '/':
-            result -= DIVISION;
-            break;
-        case '^':
-            result -= EXPONENTIATION;
-            break;
-    }
-    return (result > 0) ? false: true;
+    int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
+    return (result <= 0) ? true : false;
 }

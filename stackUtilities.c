@@ -32,7 +32,7 @@ char peekChar(struct CharStack stack){
     if(!stack.stackPointer){
         return 'STACK_EMPTY';
     }
-    return stack.stackValues[stack.stackPointer - 1];
+    return stack.stackValues[--stack.stackPointer];
 }
 
 void pushNum(struct NumStack *stack, double pushedValue){
@@ -55,8 +55,7 @@ double popNum(struct NumStack *stack){
     }
 }
 
-//Undefinned reference to this function if it is included below computeStack
-void computeStacksSinglePass(struct CharStack *operatorStack, struct NumStack *operandStack){
+void computeStack(struct CharStack *operatorStack, struct NumStack *operandStack){
     double result;
     char operatorCharacter = '\0';
     double secondOperand = popNum(operandStack);
