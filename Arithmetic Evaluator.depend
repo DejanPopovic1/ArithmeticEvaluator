@@ -1,22 +1,22 @@
 # depslib dependency file v1.0
-1491834975 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
+1493376844 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
 	<stdio.h>
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1491831316 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1492198475 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 
-1491834577 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
+1493378224 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>
 
-1491834577 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+1493378224 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	<stdio.h>
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1492094413 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1493377289 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 	<stdlib.h>
@@ -26,4 +26,6 @@
 
 1491829628 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\mathutilities.c
 	<math.h>
+
+1492193081 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\untitled3.c
 

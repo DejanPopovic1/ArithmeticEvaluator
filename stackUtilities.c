@@ -55,10 +55,6 @@ double popNum(struct NumStack *stack){
     }
 }
 
-void swapCharStack(struct CharStack *unSwappedStack){
-    swapCharArray(unSwappedStack -> stackValues, unSwappedStack -> stackPointer);
-}
-
 //Undefinned reference to this function if it is included below computeStack
 void computeStacksSinglePass(struct CharStack *operatorStack, struct NumStack *operandStack){
     double result;
@@ -84,18 +80,4 @@ void computeStacksSinglePass(struct CharStack *operatorStack, struct NumStack *o
             break;
     }
     pushNum(operandStack, result);
-}
-
-void computeStacks(struct CharStack *operatorStack, struct NumStack *operandStack){
-    if (peekChar(*operatorStack) != '('){
-        computeStacksSinglePass(operatorStack, operandStack);
-    }
-    else if (peekChar(*operatorStack) == '('){
-        operatorStack -> stackPointer--;
-        operatorStack -> stackPointer--;
-        while (peekChar(*operatorStack) != ')'){
-            computeStacksSinglePass(&operatorStack, &operandStack);
-        }
-        operatorStack -> stackPointer--;
-    }
 }

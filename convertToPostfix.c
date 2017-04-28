@@ -5,11 +5,6 @@
 
 #define CLOSING_PARENTHESIS ')'
 
-enum CYCLE{
-    FIRST_CYCLE = 1,
-    SECOND_CYCLE = 2
-};
-
 enum PRECEDENCE{
     ADDITION = 1,
     SUBTRACTION = 1,
@@ -22,43 +17,34 @@ enum PRECEDENCE{
 void createPostfixStacks(char *infix){
     char token;
     double number;
-    while((token = getToken(&infix)) != '\0')
-    {
-        if(isdigit(token))
-        {
+    while((token = getToken(&infix)) != '\0') {
+        if(isdigit(token)) {
             pushNum(&operandStack, (double)(token - '0'));
         }
-        else if(token == '(')
-        {
+        else if(token == '(') {
             pushChar(&operatorStack, token);
         }
-        else if(token == ')')
-        {
-            while(peekChar(operatorStack) != '(')
-            {
+        else if(token == ')') {
+            while(peekChar(operatorStack) != '(') {
                 computeStacksSinglePass(&operatorStack, &operandStack);
             }
             popChar(&operatorStack);
         }
-        else
-        {
-            while(isTokenLessThanOrEqualTopStackElement(token, operatorStack))
-            {
+        else {
+            while(isTokenLessThanOrEqualTopStackElement(token, operatorStack)) {
                 computeStacksSinglePass(&operatorStack, &operandStack);
             }
             pushChar(&operatorStack, token);
         }
     }
-    while(operatorStack.stackPointer > 0)
-    {
+    while(operatorStack.stackPointer > 0) {
         computeStacksSinglePass(&operatorStack, &operandStack);
     }
 }
 
 bool isTokenLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
     char peekedCharacter = peekChar(operatorStack);
-    if(peekedCharacter == 'STACK_EMPTY')
-    {
+    if(peekedCharacter == 'STACK_EMPTY') {
         return false;
     }
     return isFirstLessThanOrEqualSecond(comparitor, peekedCharacter);
@@ -100,12 +86,5 @@ bool isFirstLessThanOrEqualSecond(char a, char b){
             result -= EXPONENTIATION;
             break;
     }
-    if (result > 0)
-    {
-        return false;
-    }
-    else
-    {
-        return true;
-    }
+    return (result > 0) ? false: true;
 }
