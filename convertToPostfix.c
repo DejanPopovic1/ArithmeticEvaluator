@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-
 enum PRECEDENCE{
     ADDITION = 1,
     SUBTRACTION = 1,
@@ -41,7 +40,7 @@ bool mergeSignage(char *lastToken, char token){
     else if (token == '(' || token == ')') {
         return false;
     }
-    else if(*lastToken == '+'){
+    else if(*lastToken == '+' && operandStack.stackPointer != 0){
         popChar(&operatorStack);
         pushChar(&operatorStack, '-');
         *lastToken = '-';
@@ -55,13 +54,19 @@ bool mergeSignage(char *lastToken, char token){
     }
 }
 
+
 void calculateArithmeticExpression(char *infix){
     bool isDoubleSign = false;
     char token;
+    //bool pendingOperator = true;
     char lastToken = '+';
-    double number;
+    if(*infix == '-') {
+        pushNum(&operandStack, (double)('0' - '0'));
+        lastToken = '0';
+    }
     while((token = *infix++) != '\0') {
         isDoubleSign = mergeSignage(&lastToken, token);
+        //isNegativeNumberEncountered();
         if(isdigit(token)) {
             pushNum(&operandStack, (double)(token - '0'));
         }
@@ -75,6 +80,12 @@ void calculateArithmeticExpression(char *infix){
             popChar(&operatorStack);
         }
         else if (isDoubleSign == false) {
+            //if(token == '*' || token == '/') {//ADDED
+            //        pendingOperator = true;//ADDED
+            //}//ADDED
+            //else {
+            //    pendingOperator = false;
+            //}
             while(isTokenLessThanOrEqualTopStackElement(token, operatorStack)) {
                 computeStack(&operatorStack, &operandStack);
             }

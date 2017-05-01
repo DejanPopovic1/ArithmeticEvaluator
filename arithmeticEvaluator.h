@@ -9,8 +9,6 @@ extern struct CharStack operatorStack;
 extern struct CharStack SwappedOperatorStack;
 extern struct NumStack operandStack;
 
-
-
 struct CharStack{
     char stackValues[MAX_STACK_SIZE];
     int stackPointer;
@@ -20,8 +18,6 @@ struct NumStack{
     double stackValues[MAX_STACK_SIZE];
     int stackPointer;
 };
-
-
 
 void pushChar(struct CharStack *, char pushedValue);
 char popChar(struct CharStack *);
@@ -36,8 +32,6 @@ void printDoubleArray(double*, int);
 void printDoubleStack(struct NumStack);
 
 char* getKeyboardInput(void);
-
-//int linearSearch(char, struct precedence *);
 
 void calculateArithmeticExpression(char *);
 
