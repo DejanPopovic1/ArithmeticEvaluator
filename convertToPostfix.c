@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+
 enum PRECEDENCE{
     ADDITION = 1,
     SUBTRACTION = 1,
@@ -29,10 +30,38 @@ int linearSearch(char searchChar, struct precedence *arrayToSearch){
     return -1;
 }
 
+bool mergeSignage(char *lastToken, char token){
+    if(isdigit(*lastToken) || isdigit(token)) {
+        *lastToken = token;
+        return false;
+    }
+    else if (token == '+') {
+        return true;
+    }
+    else if (token == '(' || token == ')') {
+        return false;
+    }
+    else if(*lastToken == '+'){
+        popChar(&operatorStack);
+        pushChar(&operatorStack, '-');
+        *lastToken = '-';
+        return true;
+    }
+    else if(*lastToken == '-'){
+        popChar(&operatorStack);
+        pushChar(&operatorStack, '+');
+        *lastToken = '+';
+        return true;
+    }
+}
+
 void calculateArithmeticExpression(char *infix){
+    bool isDoubleSign = false;
     char token;
+    char lastToken = '+';
     double number;
     while((token = *infix++) != '\0') {
+        isDoubleSign = mergeSignage(&lastToken, token);
         if(isdigit(token)) {
             pushNum(&operandStack, (double)(token - '0'));
         }
@@ -45,7 +74,7 @@ void calculateArithmeticExpression(char *infix){
             }
             popChar(&operatorStack);
         }
-        else {
+        else if (isDoubleSign == false) {
             while(isTokenLessThanOrEqualTopStackElement(token, operatorStack)) {
                 computeStack(&operatorStack, &operandStack);
             }
@@ -68,4 +97,30 @@ bool isTokenLessThanOrEqualTopStackElement(char comparitor, struct CharStack ope
 bool isFirstLessThanOrEqualSecond(char a, char b){
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
     return (result <= 0) ? true : false;
+}
+
+void computeStack(struct CharStack *operatorStack, struct NumStack *operandStack){
+    double result;
+    char operatorCharacter = '\0';
+    double secondOperand = popNum(operandStack);
+    double firstOperand = popNum(operandStack);
+    operatorCharacter = popChar(operatorStack);
+    switch(operatorCharacter){
+        case '+':
+            result = add(firstOperand, secondOperand);
+            break;
+        case '-':
+            result = subtract(firstOperand, secondOperand);
+            break;
+        case '*':
+            result = multiply(firstOperand, secondOperand);
+            break;
+        case '/':
+            result = divide(firstOperand, secondOperand);
+            break;
+        case '^':
+            result = exponentiate(firstOperand, secondOperand);
+            break;
+    }
+    pushNum(operandStack, result);
 }

@@ -11,12 +11,12 @@
 1493408991 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>
 
-1493409017 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+1493409807 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	<stdio.h>
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1493408862 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1493636826 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 	<stdlib.h>

@@ -55,28 +55,3 @@ double popNum(struct NumStack *stack){
     }
 }
 
-void computeStack(struct CharStack *operatorStack, struct NumStack *operandStack){
-    double result;
-    char operatorCharacter = '\0';
-    double secondOperand = popNum(operandStack);
-    double firstOperand = popNum(operandStack);
-    operatorCharacter = popChar(operatorStack);
-    switch(operatorCharacter){
-        case '+':
-            result = add(firstOperand, secondOperand);
-            break;
-        case '-':
-            result = subtract(firstOperand, secondOperand);
-            break;
-        case '*':
-            result = multiply(firstOperand, secondOperand);
-            break;
-        case '/':
-            result = divide(firstOperand, secondOperand);
-            break;
-        case '^':
-            result = exponentiate(firstOperand, secondOperand);
-            break;
-    }
-    pushNum(operandStack, result);
-}
