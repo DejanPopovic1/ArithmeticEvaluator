@@ -29,48 +29,60 @@ int linearSearch(char searchChar, struct precedence *arrayToSearch){
     return -1;
 }
 
-bool mergeSignage(char *lastToken, char token){
-    if(isdigit(*lastToken) || isdigit(token)) {
-        *lastToken = token;
+bool flushBufferedOperatorStack() {
+    char comparitor1;
+    char comparitor2;
+    char poppedOperator;
+    char secondPoppedOperator;
+    while(bufferedOperatorStack.stackPointer > 2){
+        comparitor1 = popChar(&bufferedOperatorStack);
+        comparitor2 = popChar(&bufferedOperatorStack);
+        if(comparitor1 == '-' && comparitor2 == '-') {
+            pushChar(&bufferedOperatorStack, '+');
+        }
+        else if((comparitor1 == '+' && comparitor2 == '-') || (comparitor1 == '-' && comparitor2 == '+')) {
+            pushChar(&bufferedOperatorStack, '-');
+        }
+        else {
+            ;
+        }
+    }
+    if(bufferedOperatorStack.stackPointer == 2) {
+        poppedOperator = popChar(&bufferedOperatorStack);
+        //if(poppedOperator == '*' || poppedOperator == '/') {
+        //    secondPoppedOperator = popChar(&bufferedOperatorStack);
+        //    pushChar(&operatorStack, secondPoppedOperator);
+        //    pushChar(&operatorStack, poppedOperator);
+        //    return false;
+        //}
+        //else {
+            pushChar(&operatorStack, popChar(&bufferedOperatorStack));
+            return (poppedOperator == '-') ? true : false;
+        //}
+    }
+    else if(bufferedOperatorStack.stackPointer == 1) {
+       pushChar(&operatorStack, popChar(&bufferedOperatorStack));
+       return false;
+    }
+    else {
         return false;
-    }
-    else if (token == '+') {
-        return true;
-    }
-    else if (token == '(' || token == ')') {
-        return false;
-    }
-    else if(*lastToken == '+' && operandStack.stackPointer != 0){
-        popChar(&operatorStack);
-        pushChar(&operatorStack, '-');
-        *lastToken = '-';
-        return true;
-    }
-    else if(*lastToken == '-'){
-        popChar(&operatorStack);
-        pushChar(&operatorStack, '+');
-        *lastToken = '+';
-        return true;
     }
 }
 
-
 void calculateArithmeticExpression(char *infix){
-    bool isDoubleSign = false;
+    char charTopStack;
+    char charTopBufferStack;
+    double numTopStack;
     char token;
-    //bool pendingOperator = true;
-    char lastToken = '+';
     if(*infix == '-') {
         pushNum(&operandStack, (double)('0' - '0'));
-        lastToken = '0';
     }
     while((token = *infix++) != '\0') {
-        isDoubleSign = mergeSignage(&lastToken, token);
-        //isNegativeNumberEncountered();
         if(isdigit(token)) {
-            pushNum(&operandStack, (double)(token - '0'));
+            (flushBufferedOperatorStack()) ? pushNum(&operandStack, -1*(double)(token - '0')) : pushNum(&operandStack, (double)(token - '0'));
         }
         else if(token == '(') {
+            flushBufferedOperatorStack();
             pushChar(&operatorStack, token);
         }
         else if(token == ')') {
@@ -79,18 +91,15 @@ void calculateArithmeticExpression(char *infix){
             }
             popChar(&operatorStack);
         }
-        else if (isDoubleSign == false) {
-            //if(token == '*' || token == '/') {//ADDED
-            //        pendingOperator = true;//ADDED
-            //}//ADDED
-            //else {
-            //    pendingOperator = false;
-            //}
+        else {
             while(isTokenLessThanOrEqualTopStackElement(token, operatorStack)) {
                 computeStack(&operatorStack, &operandStack);
             }
-            pushChar(&operatorStack, token);
+            pushChar(&bufferedOperatorStack, token);
         }
+        charTopBufferStack = bufferedOperatorStack.stackValues[bufferedOperatorStack.stackPointer - 1];
+        numTopStack = operandStack.stackValues[operandStack.stackPointer - 1];
+        charTopStack = operatorStack.stackValues[operatorStack.stackPointer -1];
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);

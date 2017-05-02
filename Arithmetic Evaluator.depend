@@ -8,15 +8,15 @@
 	"arithmeticEvaluator.h"
 	<stdio.h>
 
-1493642980 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
+1493656837 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>
 
-1493409807 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+1493656837 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	<stdio.h>
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1493651750 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1493733553 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 	<stdlib.h>

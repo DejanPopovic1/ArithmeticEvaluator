@@ -6,7 +6,7 @@
 #define STACK_EMPTY E
 
 extern struct CharStack operatorStack;
-extern struct CharStack SwappedOperatorStack;
+extern struct CharStack bufferedOperatorStack;
 extern struct NumStack operandStack;
 
 struct CharStack{

@@ -5,7 +5,7 @@
 #define MAX_STACK_SIZE 200
 
 struct CharStack operatorStack = {.stackPointer = 0};
-struct CharStack swappedOperatorStack = {.stackPointer = 0};
+struct CharStack bufferedOperatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
 void pushChar(struct CharStack *stack, char pushedValue){
