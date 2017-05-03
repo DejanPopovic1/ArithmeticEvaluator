@@ -33,9 +33,6 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="arithmeticEvaluator.h" />
-		<Unit filename="arrayUtilities.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="convertToPostfix.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -49,6 +46,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="stackUtilities.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="testingSuite.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

@@ -4,19 +4,20 @@
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1493764778 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1493821173 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
+	"CuTest.h"
 
 1493757570 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>
 
-1493758283 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+1493817470 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	<stdio.h>
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1493815358 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1493817470 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 	<stdlib.h>
@@ -30,15 +31,14 @@
 
 1492193081 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\untitled3.c
 
-1493642980 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\testingsuite.c
-	<stdarg.h>
-	<stddef.h>
-	<setjmp.h>
-	"cmocka.h"
-	"cmocka_pbc.h"
+1493820513 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\testingsuite.c
 
 1424092616 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\cmocka.h
 
 1423649000 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\cmocka_pbc.h
 	<assert.h>
+
+1279789868 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\cutest.h
+	<setjmp.h>
+	<stdarg.h>
 

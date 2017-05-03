@@ -54,7 +54,7 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
         return isThereAnythingToFlush;
     }
     else if(bufferedOperatorStack.stackPointer == 1) {
-        *signage = '+';
+        //*signage = '+';
         *flushedOperator = popChar(&bufferedOperatorStack);
         return isThereAnythingToFlush;
     }
@@ -77,11 +77,11 @@ void calculateArithmeticExpression(char *infix){
     while((token = *infix++) != '\0') {
         if(isdigit(token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
-                (signage == '-') ? pushNum(&operandStack, (double)(-1)*(token - '0')) : pushNum(&operandStack, (double)(token - '0'));//The number was pushed appropriately
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
                     computeStack(&operatorStack, &operandStack); //Compute the stacks
                 }
                 pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
+                (signage == '-') ? pushNum(&operandStack, (double)(-1)*(token - '0')) : pushNum(&operandStack, (double)(token - '0'));//The number was pushed appropriately
             }
             else {//There was nothing to flush and we are trying to add a digit as above
                 pushNum(&operandStack, (double)(token - '0'));
@@ -97,8 +97,8 @@ void calculateArithmeticExpression(char *infix){
         charTopBufferStack = bufferedOperatorStack.stackValues[bufferedOperatorStack.stackPointer - 1];
         numTopStack = operandStack.stackValues[operandStack.stackPointer - 1];
         charTopStack = operatorStack.stackValues[operatorStack.stackPointer -1];
-        ;
-        ;
+int dummyVariable;
+dummyVariable = 1;
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
