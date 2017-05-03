@@ -30,7 +30,7 @@ char popChar(struct CharStack *stack){
 
 char peekChar(struct CharStack stack){
     if(!stack.stackPointer){
-        return 'STACK_EMPTY';
+        return 'S';
     }
     return stack.stackValues[--stack.stackPointer];
 }

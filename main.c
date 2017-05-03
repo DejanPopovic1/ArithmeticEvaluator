@@ -6,6 +6,7 @@ int main(){
     printf("\n");
     calculateArithmeticExpression(infixedUserInput);
     printDoubleStack(operandStack);
+    printCharacterStack(operatorStack);
     free(infixedUserInput);
     return 0;
 }

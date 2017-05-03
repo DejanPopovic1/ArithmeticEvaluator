@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 enum PRECEDENCE{
     ADDITION = 1,
@@ -29,11 +30,11 @@ int linearSearch(char searchChar, struct precedence *arrayToSearch){
     return -1;
 }
 
-bool flushBufferedOperatorStack() {
+bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
+    bool isThereAnythingToFlush = true;
+    *signage = '+';
     char comparitor1;
     char comparitor2;
-    char poppedOperator;
-    char secondPoppedOperator;
     while(bufferedOperatorStack.stackPointer > 2){
         comparitor1 = popChar(&bufferedOperatorStack);
         comparitor2 = popChar(&bufferedOperatorStack);
@@ -48,24 +49,18 @@ bool flushBufferedOperatorStack() {
         }
     }
     if(bufferedOperatorStack.stackPointer == 2) {
-        poppedOperator = popChar(&bufferedOperatorStack);
-        //if(poppedOperator == '*' || poppedOperator == '/') {
-        //    secondPoppedOperator = popChar(&bufferedOperatorStack);
-        //    pushChar(&operatorStack, secondPoppedOperator);
-        //    pushChar(&operatorStack, poppedOperator);
-        //    return false;
-        //}
-        //else {
-            pushChar(&operatorStack, popChar(&bufferedOperatorStack));
-            return (poppedOperator == '-') ? true : false;
-        //}
+        *signage = popChar(&bufferedOperatorStack);
+        *flushedOperator = popChar(&bufferedOperatorStack);
+        return isThereAnythingToFlush;
     }
     else if(bufferedOperatorStack.stackPointer == 1) {
-       pushChar(&operatorStack, popChar(&bufferedOperatorStack));
-       return false;
+        *signage = '+';
+        *flushedOperator = popChar(&bufferedOperatorStack);
+        return isThereAnythingToFlush;
     }
-    else {
-        return false;
+    else if (bufferedOperatorStack.stackPointer == 0) {
+        isThereAnythingToFlush = false;
+        return isThereAnythingToFlush;
     }
 }
 
@@ -74,41 +69,45 @@ void calculateArithmeticExpression(char *infix){
     char charTopBufferStack;
     double numTopStack;
     char token;
+    char signage;
+    char flushedOperator;
     if(*infix == '-') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
     while((token = *infix++) != '\0') {
         if(isdigit(token)) {
-            (flushBufferedOperatorStack()) ? pushNum(&operandStack, -1*(double)(token - '0')) : pushNum(&operandStack, (double)(token - '0'));
-        }
-        else if(token == '(') {
-            flushBufferedOperatorStack();
-            pushChar(&operatorStack, token);
-        }
-        else if(token == ')') {
-            while(peekChar(operatorStack) != '(') {
-                computeStack(&operatorStack, &operandStack);
+            if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
+                (signage == '-') ? pushNum(&operandStack, (double)(-1)*(token - '0')) : pushNum(&operandStack, (double)(token - '0'));//The number was pushed appropriately
+                while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
+                    computeStack(&operatorStack, &operandStack); //Compute the stacks
+                }
+                pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
             }
-            popChar(&operatorStack);
+            else {//There was nothing to flush and we are trying to add a digit as above
+                pushNum(&operandStack, (double)(token - '0'));
+            }
+
+
+            //if(!(bufferedOperatorStack.stackPointer == 0 && operatorStack.stackPointer == 0)) {//The conditional statement ensures that flushedOperator and Operator stack remain unchanged when the first number is pushed onto the number stack. If this is not here, the operator stack gets pushed junk and the stack pointer moves by one on the first number push
+
         }
         else {
-            while(isTokenLessThanOrEqualTopStackElement(token, operatorStack)) {
-                computeStack(&operatorStack, &operandStack);
-            }
             pushChar(&bufferedOperatorStack, token);
         }
         charTopBufferStack = bufferedOperatorStack.stackValues[bufferedOperatorStack.stackPointer - 1];
         numTopStack = operandStack.stackValues[operandStack.stackPointer - 1];
         charTopStack = operatorStack.stackValues[operatorStack.stackPointer -1];
+        ;
+        ;
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
     }
 }
 
-bool isTokenLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
+bool isFlushedOperatorLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
     char peekedCharacter = peekChar(operatorStack);
-    if(peekedCharacter == 'STACK_EMPTY') {
+    if(peekedCharacter == 'S') {
         return false;
     }
     return isFirstLessThanOrEqualSecond(comparitor, peekedCharacter);

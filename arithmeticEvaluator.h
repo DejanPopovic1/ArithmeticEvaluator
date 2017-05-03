@@ -41,7 +41,7 @@ double multiply(double, double);
 double divide(double, double);
 double exponentiate(double, double);
 
-bool isTokenLessThanOrEqualTopStackElement(char, struct CharStack);
+bool isFlushedOperatorLessThanOrEqualTopStackElement(char, struct CharStack);
 bool isFirstLessThanOrEqualSecond(char, char);
 
 #endif

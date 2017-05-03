@@ -22,6 +22,9 @@ void printDoubleArray(double* arrayToBePrinted, int sizeOfArray){
 
 void printCharacterStack(struct CharStack stackToBePrinted){
     int sizeOfStack = stackToBePrinted.stackPointer;
+    if (sizeOfStack == 0) {
+        printf("Stack Empty");
+    }
     char characterArrayToBePrinted[MAX_STACK_SIZE];
     int i;
     for(i = 0; i < sizeOfStack; i++) {
