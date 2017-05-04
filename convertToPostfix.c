@@ -71,7 +71,7 @@ void calculateArithmeticExpression(char *infix){
     char token;
     char signage;
     char flushedOperator;
-    if(*infix == '-') {
+    if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
     while((token = *infix++) != '\0') {
