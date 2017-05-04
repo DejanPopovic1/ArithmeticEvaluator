@@ -4,10 +4,9 @@
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1493821173 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1493916324 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
-	"CuTest.h"
 
 1493757570 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>

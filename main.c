@@ -11,5 +11,6 @@ int main(){
     printDoubleStack(operandStack);
     printCharacterStack(operatorStack);
     free(infixedUserInput);
+
     return 0;
 }

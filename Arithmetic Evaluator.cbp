@@ -32,6 +32,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="AllTests.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="arithmeticEvaluator.h" />
 		<Unit filename="convertToPostfix.c">
 			<Option compilerVar="CC" />
