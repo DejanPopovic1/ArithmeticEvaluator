@@ -35,7 +35,7 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     *signage = '+';
     char comparitor1;
     char comparitor2;
-    while(bufferedOperatorStack.stackPointer > 2){
+    while(bufferedOperatorStack.stackPointer > 2) {
         comparitor1 = popChar(&bufferedOperatorStack);
         comparitor2 = popChar(&bufferedOperatorStack);
         if(comparitor1 == '-' && comparitor2 == '-') {
@@ -86,11 +86,36 @@ void calculateArithmeticExpression(char *infix){
             else {//There was nothing to flush and we are trying to add a digit as above
                 pushNum(&operandStack, (double)(token - '0'));
             }
-
-
-            //if(!(bufferedOperatorStack.stackPointer == 0 && operatorStack.stackPointer == 0)) {//The conditional statement ensures that flushedOperator and Operator stack remain unchanged when the first number is pushed onto the number stack. If this is not here, the operator stack gets pushed junk and the stack pointer moves by one on the first number push
-
         }
+
+        else if(token == '(') {
+            if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a opening parenthesis as above
+                while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
+                    computeStack(&operatorStack, &operandStack); //Compute the stacks
+                }
+                pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
+                if(signage == '+') {//The opening parenthesis was pushed appropriately
+                    pushChar(&operatorStack, token);
+                }
+                else {//An invisible '-1' is pushed onto the number stack. An invisible * is pushed onto the operator stack. The opening parenthesis was pushed appropriately
+                    pushNum(&operandStack, (double)(-1));
+                    pushChar(&operatorStack, '*');
+                    pushChar(&operatorStack, token);
+                }
+            }
+            else {//There was nothing to flush and we are trying to add an opening parenthesis as above
+                pushNum(&operandStack, (double)(token - '0'));
+            }
+        }
+
+        else if(token == ')') {
+            //while(pop the stack. popped character is not an opening parenthesis)
+            while (peekChar(operatorStack) != '(') {
+                computeStack(&operatorStack, &operandStack);
+            }
+            popChar(&operatorStack);
+        }
+
         else {
             pushChar(&bufferedOperatorStack, token);
         }
