@@ -69,6 +69,7 @@ void calculateArithmeticExpression(char *infix){
     char charTopBufferStack;
     double numTopStack;
     char token;
+    char previousToken;
     char signage;
     char flushedOperator;
     if(*infix == '-' || *infix == '+') {
@@ -103,9 +104,10 @@ void calculateArithmeticExpression(char *infix){
                     pushChar(&operatorStack, token);
                 }
             }
-            else {//There was nothing to flush and we are trying to add an opening parenthesis as above
-                pushNum(&operandStack, (double)(token - '0'));
+            else {//There was nothing to flush and we are trying to add an opening parenthesis as above. This will happen either as (1+1) or 1+((1+1)+1)
+                pushChar(&operatorStack, token);
             }
+
         }
 
         else if(token == ')') {
@@ -119,6 +121,7 @@ void calculateArithmeticExpression(char *infix){
         else {
             pushChar(&bufferedOperatorStack, token);
         }
+        previousToken = token;
         charTopBufferStack = bufferedOperatorStack.stackValues[bufferedOperatorStack.stackPointer - 1];
         numTopStack = operandStack.stackValues[operandStack.stackPointer - 1];
         charTopStack = operatorStack.stackValues[operatorStack.stackPointer -1];
