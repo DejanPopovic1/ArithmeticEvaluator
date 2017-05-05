@@ -4,7 +4,7 @@
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1493916324 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1493991078 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 
@@ -16,7 +16,7 @@
 	<stdlib.h>
 	"arithmeticEvaluator.h"
 
-1493982958 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1493999175 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"arithmeticEvaluator.h"
 	<stdio.h>
 	<stdlib.h>
