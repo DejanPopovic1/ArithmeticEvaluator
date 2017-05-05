@@ -64,25 +64,39 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     }
 }
 
-void consolidateSignage(char *newToken, char **newInfix) {
-    char peekedToken = *(*newInfix + 1);
-    if(*newToken == '-' && peekedToken == '-') {
-        *newToken = '+';
+void consolidateSignage(char **newInfix) {
+    char peekedToken;
+    while(true){
+    peekedToken = *(*newInfix + 1);
+    if (isdigit(**newInfix) || **newInfix == '(' || **newInfix == ')' || isdigit(peekedToken) || peekedToken == '(' || peekedToken == ')' ) {return;}//REFACTOR everything except operators
+    //if (true) {return;}
+    if((**newInfix) == '-' && peekedToken == '-') {
+        *newInfix = *newInfix + 1;
+        **newInfix = '+';
     }
-    else if(*newToken == '-' || peekedToken == '-') {
-        *newToken = '-';
+    else if((**newInfix) == '-' || peekedToken == '-') {
+        *newInfix = *newInfix + 1;
+        **newInfix = '-';
+    }
+    else if((**newInfix) == '+' || peekedToken == '+') {
+        *newInfix = *newInfix + 1;
+    }
     }
 }
 
 void calculateArithmeticExpression(char *infix){
-    char token;
+    char token = '0';
     char peekedToken;
     if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
-    while((token = *infix++) != '\0') {
-        peekedToken = *(infix);
-        //consolidateSignageAndPeekAhead(&token, &infix)
+    while((token = *infix) != '\0') {//read in token
+
+        //Consolidate function will change token and advance the pointer if necassary.
+        consolidateSignage(&infix);
+        token = *infix;
+        peekedToken = *(infix + 1); //Keep peek ahead intact after consolidating signs
+        infix++;//move to next token
         if(isdigit(token)) {
             pushNum(&operandStack, (double)(token - '0'));
         }
