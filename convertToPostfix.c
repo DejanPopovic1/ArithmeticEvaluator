@@ -65,9 +65,6 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
 }
 
 void calculateArithmeticExpression(char *infix){
-    char charTopStack;
-    char charTopBufferStack;
-    double numTopStack;
     char token;
     char previousToken;
     char signage;
@@ -88,7 +85,6 @@ void calculateArithmeticExpression(char *infix){
                 pushNum(&operandStack, (double)(token - '0'));
             }
         }
-
         else if(token == '(') {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a opening parenthesis as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
@@ -107,26 +103,20 @@ void calculateArithmeticExpression(char *infix){
             else {//There was nothing to flush and we are trying to add an opening parenthesis as above. This will happen either as (1+1) or 1+((1+1)+1)
                 pushChar(&operatorStack, token);
             }
-
         }
-
         else if(token == ')') {
-            //while(pop the stack. popped character is not an opening parenthesis)
             while (peekChar(operatorStack) != '(') {
                 computeStack(&operatorStack, &operandStack);
             }
             popChar(&operatorStack);
         }
-
         else {
+            if(previousToken == '(') {
+                pushNum(&operandStack, 0);
+            }
             pushChar(&bufferedOperatorStack, token);
         }
         previousToken = token;
-        charTopBufferStack = bufferedOperatorStack.stackValues[bufferedOperatorStack.stackPointer - 1];
-        numTopStack = operandStack.stackValues[operandStack.stackPointer - 1];
-        charTopStack = operatorStack.stackValues[operatorStack.stackPointer -1];
-int dummyVariable;
-dummyVariable = 1;
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
