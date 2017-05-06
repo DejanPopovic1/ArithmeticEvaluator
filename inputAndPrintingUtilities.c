@@ -44,6 +44,10 @@ void printDoubleStack(struct NumStack stackToBePrinted){
     printDoubleArray(numberArrayToBePrinted, sizeOfStack);
 }
 
+char peekString(char* inputString) {
+    return *inputString;
+}
+
 char* getKeyboardInput(void){
     int i;
     char inputCharacter;
