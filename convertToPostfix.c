@@ -64,15 +64,23 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     }
 }
 
+char getToken(char** infix) {
+    char returnToken = **infix;
+    (*infix)++;
+    return returnToken;
+}
+
 void calculateArithmeticExpression(char *infix){
-    char token;
+//    char *getToken(&infix);
+    char token = '0';
     char previousToken;
     char signage;
     char flushedOperator;
     if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
-    while((token = *infix++) != '\0') {
+    while(token != '\0') {
+        token = getToken(&infix);
         if(isdigit(token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
