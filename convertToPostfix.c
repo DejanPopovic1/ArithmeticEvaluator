@@ -1,24 +1,15 @@
-#include "arithmeticEvaluator.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <ctype.h>
+#include "convertToPostfix.h"
 
-enum PRECEDENCE{
-    ADDITION = 1,
-    SUBTRACTION = 1,
-    MULTIPLICATION = 2,
-    DIVISION = 2,
-    EXPONENTIATION = 3,
-    BRACKETS = 4
-};
-
-struct precedence{
-    char arithmeticOperator;
-    int precedence;
-};
+struct CharStack operatorStack = {.stackPointer = 0};
+struct CharStack bufferedOperatorStack = {.stackPointer = 0};
+struct NumStack operandStack = {.stackPointer = 0};
 
 struct precedence precedenceArray[] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'\0', 1}};
+
+bool isFirstLessThanOrEqualSecond(char a, char b){
+    int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
+    return (result <= 0) ? true : false;
+}
 
 int linearSearch(char searchChar, struct precedence *arrayToSearch){
     int i;
@@ -28,6 +19,14 @@ int linearSearch(char searchChar, struct precedence *arrayToSearch){
         }
     }
     return -1;
+}
+
+bool isFlushedOperatorLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
+    char peekedCharacter = peekChar(operatorStack);
+    if(peekedCharacter == 'S') {
+        return false;
+    }
+    return isFirstLessThanOrEqualSecond(comparitor, peekedCharacter);
 }
 
 bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
@@ -62,6 +61,7 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
         isThereAnythingToFlush = false;
         return isThereAnythingToFlush;
     }
+    return isThereAnythingToFlush;
 }
 
 char getToken(char** infix) {
@@ -129,19 +129,7 @@ void calculateArithmeticExpression(char *infix){
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
     }
-}
-
-bool isFlushedOperatorLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
-    char peekedCharacter = peekChar(operatorStack);
-    if(peekedCharacter == 'S') {
-        return false;
-    }
-    return isFirstLessThanOrEqualSecond(comparitor, peekedCharacter);
-}
-
-bool isFirstLessThanOrEqualSecond(char a, char b){
-    int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
-    return (result <= 0) ? true : false;
+        printDoubleStack(operandStack);
 }
 
 void computeStack(struct CharStack *operatorStack, struct NumStack *operandStack){

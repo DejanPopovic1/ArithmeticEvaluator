@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "arithmeticEvaluator.h"
+#include "stackUtilities.h"
+#include "inputAndPrintingUtilities.h"
 #define MEMORY_ALLOCATE 200
 
 const char* withinArraySeperator = "   ";

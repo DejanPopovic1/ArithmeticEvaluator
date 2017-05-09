@@ -1,4 +1,4 @@
-#include <math.h>
+#include "mathUtilities.h"
 
 double add(double firstOperand, double secondOperand){
     return firstOperand + secondOperand;

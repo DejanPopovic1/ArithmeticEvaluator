@@ -1,16 +1,11 @@
-#include "arithmeticEvaluator.h"
 #include <stdio.h>
-
-
+#include "convertToPostfix.h"
+#include "inputAndPrintingUtilities.h"
 
 int main(){
-
     char* infixedUserInput = getKeyboardInput();
     printf("\n");
     calculateArithmeticExpression(infixedUserInput);
-    printDoubleStack(operandStack);
-    printCharacterStack(operatorStack);
     free(infixedUserInput);
-
     return 0;
 }

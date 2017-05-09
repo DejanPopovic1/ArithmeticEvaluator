@@ -1,12 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "arithmeticEvaluator.h"
-
-#define MAX_STACK_SIZE 200
-
-struct CharStack operatorStack = {.stackPointer = 0};
-struct CharStack bufferedOperatorStack = {.stackPointer = 0};
-struct NumStack operandStack = {.stackPointer = 0};
+#include "stackUtilities.h"
 
 void pushChar(struct CharStack *stack, char pushedValue){
     if (stack -> stackPointer < MAX_STACK_SIZE) {
@@ -54,4 +46,3 @@ double popNum(struct NumStack *stack){
         exit(-1);
     }
 }
-

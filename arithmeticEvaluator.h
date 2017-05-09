@@ -2,22 +2,9 @@
 #define ARITHMETICEVALUATOR_H
 
 #include <stdbool.h>
-#define MAX_STACK_SIZE 200
-#define STACK_EMPTY E
 
-extern struct CharStack operatorStack;
-extern struct CharStack bufferedOperatorStack;
-extern struct NumStack operandStack;
 
-struct CharStack{
-    char stackValues[MAX_STACK_SIZE];
-    int stackPointer;
-};
 
-struct NumStack{
-    double stackValues[MAX_STACK_SIZE];
-    int stackPointer;
-};
 
 void pushChar(struct CharStack *, char pushedValue);
 char popChar(struct CharStack *);

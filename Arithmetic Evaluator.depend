@@ -1,32 +1,28 @@
 # depslib dependency file v1.0
-1494238582 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
+1494328193 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
 	<stdio.h>
 	<stdlib.h>
-	"arithmeticEvaluator.h"
+	"stackUtilities.h"
+	"inputAndPrintingUtilities.h"
 
-1493991078 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
-	"arithmeticEvaluator.h"
+1494333665 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	<stdio.h>
+	"convertToPostfix.h"
+	"inputAndPrintingUtilities.h"
 
-1493757570 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
+1494271511 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>
 
-1493817470 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
-	<stdio.h>
-	<stdlib.h>
-	"arithmeticEvaluator.h"
+1494330851 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+	"stackUtilities.h"
 
-1494246998 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
-	"arithmeticEvaluator.h"
-	<stdio.h>
-	<stdlib.h>
-	<stdbool.h>
-	<ctype.h>
+1494333705 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+	"convertToPostfix.h"
 
 1486317321 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arrayutilities.c
 
-1491829628 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\mathutilities.c
-	<math.h>
+1494320038 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\mathutilities.c
+	"mathUtilities.h"
 
 1492193081 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\untitled3.c
 
@@ -40,4 +36,30 @@
 1279789868 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\cutest.h
 	<setjmp.h>
 	<stdarg.h>
+
+1494323798 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stringutilities.c
+	"stringUtilities.h"
+
+1494333665 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.h
+	<stdbool.h>
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"stackUtilities.h"
+	"mathUtilities.h"
+	"inputAndPrintingUtilities.h"
+
+1494330787 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.h
+	<stdio.h>
+	<stdlib.h>
+
+1494326630 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\mathutilities.h
+	<math.h>
+
+1494326630 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stringutilities.h
+	<stdbool.h>
+	<ctype.h>
+	<string.h>
+
+1494326877 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.h
 
