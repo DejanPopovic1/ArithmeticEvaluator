@@ -5,7 +5,7 @@
 	"stackUtilities.h"
 	"inputAndPrintingUtilities.h"
 
-1494333665 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1494333738 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	<stdio.h>
 	"convertToPostfix.h"
 	"inputAndPrintingUtilities.h"
@@ -16,7 +16,7 @@
 1494330851 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	"stackUtilities.h"
 
-1494333705 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1494334794 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"convertToPostfix.h"
 
 1486317321 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arrayutilities.c
@@ -62,4 +62,13 @@
 	<string.h>
 
 1494326877 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.h
+
+1494427418 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.c
+	"tokenizer.h"
+
+1494427418 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.h
+	<stdio.h>
+	<stddef.h>
+	<stdlib.h>
+	<ctype.h>
 
