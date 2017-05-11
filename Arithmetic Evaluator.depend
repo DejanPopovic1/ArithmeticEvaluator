@@ -16,8 +16,9 @@
 1494330851 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	"stackUtilities.h"
 
-1494434550 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1494510147 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"convertToPostfix.h"
+	"tokenizer.h"
 
 1486317321 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arrayutilities.c
 
@@ -40,7 +41,7 @@
 1494323798 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stringutilities.c
 	"stringUtilities.h"
 
-1494501363 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.h
+1494510147 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.h
 	<stdbool.h>
 	<stdio.h>
 	<stdlib.h>
@@ -63,10 +64,10 @@
 
 1494326877 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.h
 
-1494501243 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.c
+1494510147 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.c
 	"tokenizer.h"
 
-1494501503 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.h
+1494510147 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.h
 	<stdio.h>
 	<stddef.h>
 	<stdlib.h>
