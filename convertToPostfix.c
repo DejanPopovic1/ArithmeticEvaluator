@@ -1,4 +1,5 @@
 #include "convertToPostfix.h"
+#include "tokenizer.h"
 
 struct CharStack operatorStack = {.stackPointer = 0};
 struct CharStack bufferedOperatorStack = {.stackPointer = 0};

@@ -1,10 +1,10 @@
 #include "tokenizer.h"
 
-static char peekString(char *stringToPeek){
+char peekString(char *stringToPeek){
     return *stringToPeek;
 }
 
-char *getToken(char **unparsedInput){
+char *getToken(char **unparsedInput, struct precedence precedenceArray[]){
     char initialPeekedCharacter = peekString(*unparsedInput);
     char *token = malloc(MAX_TOKEN_LENGTH * sizeof(char));
     int i;
@@ -18,7 +18,7 @@ char *getToken(char **unparsedInput){
         *(token + i) = '\0';
         return token;
     }
-    else if (initialPeekedCharacter == '(' || initialPeekedCharacter == ')' || initialPeekedCharacter == '+' || initialPeekedCharacter == '\0' ) {
+    else if (linearSearch(initialPeekedCharacter, precedenceArray) >= 0) {
         *token = initialPeekedCharacter;
         *(token + 1) = '\0';
         return token;

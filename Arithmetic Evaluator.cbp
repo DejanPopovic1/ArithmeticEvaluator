@@ -32,28 +32,30 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="AllTests.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="arithmeticEvaluator.h" />
 		<Unit filename="convertToPostfix.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="convertToPostfix.h" />
 		<Unit filename="inputAndPrintingUtilities.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="inputAndPrintingUtilities.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="mathUtilities.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="mathUtilities.h" />
 		<Unit filename="stackUtilities.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="testingSuite.c">
+		<Unit filename="stackUtilities.h" />
+		<Unit filename="stringUtilities.h" />
+		<Unit filename="tokenizer.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="tokenizer.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
