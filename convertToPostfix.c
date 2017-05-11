@@ -5,7 +5,7 @@ struct CharStack operatorStack = {.stackPointer = 0};
 struct CharStack bufferedOperatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
-struct precedence precedenceArray[6] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'\0', 1}};
+struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}};
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
@@ -14,7 +14,7 @@ bool isFirstLessThanOrEqualSecond(char a, char b){
 
 int linearSearch(char searchChar, struct precedence *arrayToSearch){
     int i;
-    for(i = 0; i < 6; i++) {
+    for(i = 0; i < SIZE_OF_PRECEDENCE_ARRAY; i++) {
         if(arrayToSearch[i].arithmeticOperator == searchChar) {
             return arrayToSearch[i].precedence;
         }
@@ -79,7 +79,10 @@ void calculateArithmeticExpression(char *infix){
     if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
-    while(token != '\0') {
+    while(1) {
+        if (token == '\0') {
+            break;
+        }
         token = getTokenNONLIBRARY(&infix);
         if(isdigit(token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
