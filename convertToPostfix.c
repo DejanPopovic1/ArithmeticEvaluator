@@ -5,7 +5,7 @@ struct CharStack operatorStack = {.stackPointer = 0};
 struct CharStack bufferedOperatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
-struct precedence precedenceArray[] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'\0', 1}};
+struct precedence precedenceArray[6] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'\0', 1}};
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
@@ -14,7 +14,7 @@ bool isFirstLessThanOrEqualSecond(char a, char b){
 
 int linearSearch(char searchChar, struct precedence *arrayToSearch){
     int i;
-    for(i = 0; arrayToSearch[i].arithmeticOperator != '\0'; i++) {
+    for(i = 0; i < 6; i++) {
         if(arrayToSearch[i].arithmeticOperator == searchChar) {
             return arrayToSearch[i].precedence;
         }
