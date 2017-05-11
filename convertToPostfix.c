@@ -65,12 +65,6 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     return isThereAnythingToFlush;
 }
 
-char getTokenNONLIBRARY(char** infix) {
-    char returnToken = **infix;
-    (*infix)++;
-    return returnToken;
-}
-
 void calculateArithmeticExpression(char *infix){
     char token = '0';
     char previousToken;

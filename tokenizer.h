@@ -9,6 +9,7 @@
 
 #define MAX_TOKEN_LENGTH 100
 
+char getTokenNONLIBRARY(char**);
 char peekString(char *);
 char *getToken(char **, struct precedence[]);
 
