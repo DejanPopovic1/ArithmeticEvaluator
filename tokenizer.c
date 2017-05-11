@@ -23,6 +23,10 @@ char *getToken(char **unparsedInput, struct precedence precedenceArray[]){
         *(token + 1) = '\0';
         return token;
     }
+    else if(initialPeekedCharacter == '\0') {
+        *token = initialPeekedCharacter;
+        return token;
+    }
     else {
         fprintf(stderr, "Invalid input character(s)\n");
         exit(-1);
