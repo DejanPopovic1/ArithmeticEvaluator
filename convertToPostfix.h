@@ -10,7 +10,7 @@
 #include "mathUtilities.h"
 #include "inputAndPrintingUtilities.h"
 
-#define SIZE_OF_PRECEDENCE_ARRAY 5
+#define SIZE_OF_PRECEDENCE_ARRAY 7
 
 enum PRECEDENCE_PRIORITY{
     ADDITION = 1,
