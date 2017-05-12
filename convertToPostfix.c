@@ -72,7 +72,7 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
 
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
-    char previousToken[] = "0";
+    char previousToken[MAX_TOKEN_LENGTH];
     char signage;
     char flushedOperator;
     if(*infix == '-' || *infix == '+') {
@@ -83,6 +83,7 @@ void calculateArithmeticExpression(char *infix){
             break;
         }
         token = getToken(&infix, precedenceArray);
+        //printf("%s\n", token);
         if(isdigit(*token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
