@@ -89,10 +89,10 @@ void calculateArithmeticExpression(char *infix){
                     computeStack(&operatorStack, &operandStack); //Compute the stacks
                 }
                 pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
-                (signage == '-') ? pushNum(&operandStack, (double)(-1)*(*token - '0')) : pushNum(&operandStack, (double)(*token - '0'));//The number was pushed appropriately
+                (signage == '-') ? pushNum(&operandStack, (-1)*strtod(token, NULL)) : pushNum(&operandStack, strtod(token, NULL));//The number was pushed appropriately
             }
             else {//There was nothing to flush and we are trying to add a digit as above
-                pushNum(&operandStack, (double)(*token - '0'));
+                pushNum(&operandStack, strtod(token, NULL));
             }
         }
         else if(strcmp(token, "(") == 0) {
