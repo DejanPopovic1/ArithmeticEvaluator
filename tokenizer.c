@@ -19,7 +19,7 @@ char *getToken(char **unparsedInput, struct precedence precedenceArray[]){
     if(isdigit(initialPeekedCharacter)) {
         *token = initialPeekedCharacter;
         (*unparsedInput)++;
-        for(i = 1; isdigit(peekString(*unparsedInput)); i++) {
+        for(i = 1; isdigit(peekString(*unparsedInput)) || peekString(*unparsedInput) == '.'; i++) {
             *(token + i) = peekString(*unparsedInput);
             (*unparsedInput)++;
         }
