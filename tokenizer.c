@@ -29,6 +29,7 @@ char *getToken(char **unparsedInput, struct precedence precedenceArray[]){
     else if (linearSearch(initialPeekedCharacter, precedenceArray) >= 0) {
         *token = initialPeekedCharacter;
         *(token + 1) = '\0';
+        (*unparsedInput)++;
         return token;
     }
     else if(initialPeekedCharacter == '\0') {
