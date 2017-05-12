@@ -4,8 +4,10 @@ char peekString(char *stringToPeek){
     return *stringToPeek;
 }
 
-char getTokenNONLIBRARY(char** infix) {
-    char returnToken = **infix;
+char *getTokenNONLIBRARY(char** infix) {
+    char *returnToken = malloc(2 * sizeof(char));
+    *returnToken = **infix;
+    *(returnToken + 1) = '\0';
     (*infix)++;
     return returnToken;
 }

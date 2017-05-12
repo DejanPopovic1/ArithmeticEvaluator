@@ -5,6 +5,7 @@ struct CharStack operatorStack = {.stackPointer = 0};
 struct CharStack bufferedOperatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
+/*Although '(' and ')' has higher precedence than all other operators, it must be any value lower than the other operators to ensure its priority*/
 struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'(', 0}, {')', 0}};
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
@@ -65,63 +66,67 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     return isThereAnythingToFlush;
 }
 
+//convertgetTokenLibrary to return a string
+//Treat token as a STRING STILL USING getTOKENNONLIBRARY. COMMIT THAT
+//Switch to using getToken and test. Commit that.
+
 void calculateArithmeticExpression(char *infix){
-    char token = '0';
-    char previousToken;
+    char *token = "0";
+    char previousToken[] = "0";
     char signage;
     char flushedOperator;
     if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
     while(1) {
-        if (token == '\0') {
+        if (strcmp(token, "\0") == 0) {
             break;
         }
         token = getTokenNONLIBRARY(&infix);
-        if(isdigit(token)) {
+        if(isdigit(*token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
                     computeStack(&operatorStack, &operandStack); //Compute the stacks
                 }
                 pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
-                (signage == '-') ? pushNum(&operandStack, (double)(-1)*(token - '0')) : pushNum(&operandStack, (double)(token - '0'));//The number was pushed appropriately
+                (signage == '-') ? pushNum(&operandStack, (double)(-1)*(*token - '0')) : pushNum(&operandStack, (double)(*token - '0'));//The number was pushed appropriately
             }
             else {//There was nothing to flush and we are trying to add a digit as above
-                pushNum(&operandStack, (double)(token - '0'));
+                pushNum(&operandStack, (double)(*token - '0'));
             }
         }
-        else if(token == '(') {
+        else if(strcmp(token, "(") == 0) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a opening parenthesis as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
                     computeStack(&operatorStack, &operandStack); //Compute the stacks
                 }
                 pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
                 if(signage == '+') {//The opening parenthesis was pushed appropriately
-                    pushChar(&operatorStack, token);
+                    pushChar(&operatorStack, *token);
                 }
                 else {//An invisible '-1' is pushed onto the number stack. An invisible * is pushed onto the operator stack. The opening parenthesis was pushed appropriately
                     pushNum(&operandStack, (double)(-1));
                     pushChar(&operatorStack, '*');
-                    pushChar(&operatorStack, token);
+                    pushChar(&operatorStack, *token);
                 }
             }
             else {//There was nothing to flush and we are trying to add an opening parenthesis as above. This will happen either as (1+1) or 1+((1+1)+1)
-                pushChar(&operatorStack, token);
+                pushChar(&operatorStack, *token);
             }
         }
-        else if(token == ')') {
+        else if(strcmp(token, ")") == 0) {
             while (peekChar(operatorStack) != '(') {
                 computeStack(&operatorStack, &operandStack);
             }
             popChar(&operatorStack);
         }
         else {
-            if(previousToken == '(') {
+            if(strcmp(previousToken, "(") == 0) {
                 pushNum(&operandStack, 0);
             }
-            pushChar(&bufferedOperatorStack, token);
+            pushChar(&bufferedOperatorStack, *token);
         }
-        previousToken = token;
+        strcpy(previousToken, token);
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);

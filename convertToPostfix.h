@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 
 #include "stackUtilities.h"
 #include "mathUtilities.h"
@@ -28,7 +29,7 @@ struct precedence{
 
 int linearSearch(char, struct precedence *);
 bool flushBufferedOperatorStack(char *, char *);
-char getTokenNONLIBRARY(char**);
+//char getTokenNONLIBRARY(char**);
 void calculateArithmeticExpression(char *);
 bool isFlushedOperatorLessThanOrEqualTopStackElement(char, struct CharStack);
 bool isFirstLessThanOrEqualSecond(char, char);
