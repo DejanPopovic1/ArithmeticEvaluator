@@ -4,14 +4,6 @@ char peekString(char *stringToPeek){
     return *stringToPeek;
 }
 
-char *getTokenNONLIBRARY(char** infix) {
-    char *returnToken = malloc(2 * sizeof(char));
-    *returnToken = **infix;
-    *(returnToken + 1) = '\0';
-    (*infix)++;
-    return returnToken;
-}
-
 char *getToken(char **unparsedInput, struct precedence precedenceArray[]){
     char initialPeekedCharacter = peekString(*unparsedInput);
     char *token = malloc(MAX_TOKEN_LENGTH * sizeof(char));

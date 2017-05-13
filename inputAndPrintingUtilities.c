@@ -48,7 +48,7 @@ void printDoubleStack(struct NumStack stackToBePrinted){
 char* getKeyboardInput(void){
     int i;
     char inputCharacter;
-    char* input = malloc(sizeof(char) * MEMORY_ALLOCATE); //Remember to free memory in the caller
+    char* input = malloc(sizeof(char) * MEMORY_ALLOCATE); //This memory is free'd in the caller function main
     if (input == NULL) {
         fprintf(stderr, "Failed to allocate memory.\n");
         exit(-1);

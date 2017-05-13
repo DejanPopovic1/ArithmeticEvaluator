@@ -66,10 +66,6 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     return isThereAnythingToFlush;
 }
 
-//convertgetTokenLibrary to return a string
-//Treat token as a STRING STILL USING getTOKENNONLIBRARY. COMMIT THAT
-//Switch to using getToken and test. Commit that.
-
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
     char previousToken[MAX_TOKEN_LENGTH];
@@ -79,11 +75,10 @@ void calculateArithmeticExpression(char *infix){
         pushNum(&operandStack, (double)('0' - '0'));
     }
     while(1) {
-        if (strcmp(token, "\0") == 0) {
+        if (strcmp(token, "") == 0) {
             break;
         }
         token = getToken(&infix, precedenceArray);
-        //printf("%s\n", token);
         if(isdigit(*token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
@@ -128,10 +123,15 @@ void calculateArithmeticExpression(char *infix){
             pushChar(&bufferedOperatorStack, *token);
         }
         strcpy(previousToken, token);
+        if(!(strcmp(token, "") == 0)) {
+            free(token);
+        }
+ //
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
     }
+    free(token);
         printDoubleStack(operandStack);
 }
 
