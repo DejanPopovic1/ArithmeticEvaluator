@@ -24,10 +24,10 @@ int linearSearch(char searchChar, struct precedence *arrayToSearch){
 }
 
 bool isFlushedOperatorLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
-    char peekedCharacter = peekChar(operatorStack);
-    if(peekedCharacter == 'S') {
+    if(operatorStack.stackPointer == 0) {
         return false;
     }
+    char peekedCharacter = peekChar(operatorStack);
     return isFirstLessThanOrEqualSecond(comparitor, peekedCharacter);
 }
 

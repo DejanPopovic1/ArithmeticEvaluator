@@ -22,7 +22,8 @@ char popChar(struct CharStack *stack){
 
 char peekChar(struct CharStack stack){
     if(!stack.stackPointer){
-        return 'S';
+        fprintf(stderr, "Character Stack is empty, can't peek \n");
+        exit(-1);
     }
     return stack.stackValues[--stack.stackPointer];
 }
