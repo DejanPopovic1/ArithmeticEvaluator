@@ -1,8 +1,5 @@
 # depslib dependency file v1.0
-1494603032 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
-	<stdio.h>
-	<stdlib.h>
-	"stackUtilities.h"
+1494845569 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
 	"inputAndPrintingUtilities.h"
 
 1494602364 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
@@ -17,7 +14,7 @@
 1494330851 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	"stackUtilities.h"
 
-1494713160 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1494713459 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"convertToPostfix.h"
 	"tokenizer.h"
 
@@ -42,7 +39,7 @@
 1494323798 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stringutilities.c
 	"stringUtilities.h"
 
-1494579808 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.h
+1494845569 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.h
 	<stdbool.h>
 	<stdio.h>
 	<stdlib.h>
@@ -64,7 +61,10 @@
 	<ctype.h>
 	<string.h>
 
-1494326877 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.h
+1494845569 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.h
+	<stdio.h>
+	<stdlib.h>
+	"stackUtilities.h"
 
 1494602585 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.c
 	"tokenizer.h"

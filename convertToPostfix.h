@@ -13,15 +13,6 @@
 
 #define SIZE_OF_PRECEDENCE_ARRAY 7
 
-enum PRECEDENCE_PRIORITY{
-    ADDITION = 1,
-    SUBTRACTION = 1,
-    MULTIPLICATION = 2,
-    DIVISION = 2,
-    EXPONENTIATION = 3,
-    BRACKETS = 4
-};
-
 struct precedence{
     char arithmeticOperator;
     int precedence;

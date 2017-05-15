@@ -126,13 +126,12 @@ void calculateArithmeticExpression(char *infix){
         if(!(strcmp(token, "") == 0)) {
             free(token);
         }
- //
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
     }
     free(token);
-        printDoubleStack(operandStack);
+    printDoubleStack(operandStack);
 }
 
 void computeStack(struct CharStack *operatorStack, struct NumStack *operandStack){

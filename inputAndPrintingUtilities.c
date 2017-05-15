@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "stackUtilities.h"
 #include "inputAndPrintingUtilities.h"
-#define MEMORY_ALLOCATE 200
 
 const char* withinArraySeperator = "   ";
 const char* interArraySeperator = "\n";
