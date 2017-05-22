@@ -8,5 +8,7 @@ double subtract(double, double);
 double multiply(double, double);
 double divide(double, double);
 double exponentiate(double, double);
+double factorial(double);
+double absoluteValue(double);
 
 #endif

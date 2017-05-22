@@ -79,7 +79,6 @@ void calculateArithmeticExpression(char *infix){
         if (strcmp(token, "") == 0) {
             break;
         }
-
         if(isdigit(*token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
@@ -129,7 +128,6 @@ void calculateArithmeticExpression(char *infix){
             pushChar(&bufferedOperatorStack, *token);//An operator was reached
         }
         strcpy(previousToken, token);
-        printf("%s\n", token);
         if(!(strcmp(token, "") == 0)) {
             free(token);
         }

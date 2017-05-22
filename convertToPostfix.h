@@ -20,7 +20,6 @@ struct precedence{
 
 int linearSearch(char, struct precedence *);
 bool flushBufferedOperatorStack(char *, char *);
-//char getTokenNONLIBRARY(char**);
 void calculateArithmeticExpression(char *);
 bool isFlushedOperatorLessThanOrEqualTopStackElement(char, struct CharStack);
 bool isFirstLessThanOrEqualSecond(char, char);
