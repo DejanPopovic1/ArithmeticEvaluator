@@ -11,7 +11,7 @@
 #include "mathUtilities.h"
 #include "inputAndPrintingUtilities.h"
 
-#define SIZE_OF_PRECEDENCE_ARRAY 7
+#define SIZE_OF_PRECEDENCE_ARRAY 8
 
 struct precedence{
     char arithmeticOperator;

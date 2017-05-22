@@ -6,7 +6,7 @@ struct CharStack bufferedOperatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
 /*Although '(' and ')' has higher precedence than all other operators, it must be any value lower than the other operators to ensure its priority*/
-struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'(', 0}, {')', 0}};
+struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'!', 4}, {'(', 0}, {')', 0}};
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
@@ -75,10 +75,11 @@ void calculateArithmeticExpression(char *infix){
         pushNum(&operandStack, (double)('0' - '0'));
     }
     while(1) {
+        token = getToken(&infix, precedenceArray);
         if (strcmp(token, "") == 0) {
             break;
         }
-        token = getToken(&infix, precedenceArray);
+
         if(isdigit(*token)) {
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
@@ -116,13 +117,19 @@ void calculateArithmeticExpression(char *infix){
             }
             popChar(&operatorStack);
         }
+        else if (strcmp(token, "!") == 0) {
+            pushNum(&operandStack, (double)1);//This is a dummy addition to the stack used so that we dont have to complicate compute stack. It gets popped never to be used
+            pushChar(&operatorStack, *token);
+            computeStack(&operatorStack, &operandStack);
+        }
         else {
-            if(strcmp(previousToken, "(") == 0) {
+            if(strcmp(previousToken, "(") == 0) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value
                 pushNum(&operandStack, 0);
             }
-            pushChar(&bufferedOperatorStack, *token);
+            pushChar(&bufferedOperatorStack, *token);//An operator was reached
         }
         strcpy(previousToken, token);
+        printf("%s\n", token);
         if(!(strcmp(token, "") == 0)) {
             free(token);
         }
@@ -155,6 +162,9 @@ void computeStack(struct CharStack *operatorStack, struct NumStack *operandStack
             break;
         case '^':
             result = exponentiate(firstOperand, secondOperand);
+            break;
+        case '!':
+            result = factorial(firstOperand);
             break;
     }
     pushNum(operandStack, result);
