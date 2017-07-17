@@ -35,10 +35,10 @@ int containsChar(struct CharStack stack, char token){
     }
     for(int i = 0; i <stack.stackPointer; i++){
         if(stack.stackValues[i] == token){
-            return stack.stackPointer;
+            return i;
         }
-        return -1;
     }
+    return -1;
 }
 
 void pushNum(struct NumStack *stack, double pushedValue){

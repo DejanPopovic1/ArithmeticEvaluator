@@ -119,7 +119,7 @@ void handleOperator(char *previousToken, char *token){
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
 }
 
-void handleClosingModulo(char *token){
+void handleClosingModulus(char *token){
     while (peekChar(operatorStack) != '|') {
         computeStack(&operatorStack, &operandStack);
     }
@@ -132,7 +132,7 @@ void handleModulus(char *token){
         pushChar(&operatorStack, token);
     }
     else if(containsChar(&operatorStack, token) >= 0){
-        handleClosingModulo(token);
+        handleClosingModulus(token);
     }
 }
 
