@@ -106,6 +106,12 @@ void handleClosedParenthesis(){
     popChar(&operatorStack);
 }
 
+void handleFactorial(char *token){
+    pushNum(&operandStack, (double)1);//This is a dummy addition to the stack used so that we dont have to complicate compute stack. It gets popped never to be used
+    pushChar(&operatorStack, *token);
+    computeStack(&operatorStack, &operandStack);
+}
+
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
     char previousToken[MAX_TOKEN_LENGTH];
@@ -129,9 +135,9 @@ void calculateArithmeticExpression(char *infix){
             handleClosedParenthesis();
         }
         else if (strcmp(token, "!") == 0) {
-            pushNum(&operandStack, (double)1);//This is a dummy addition to the stack used so that we dont have to complicate compute stack. It gets popped never to be used
-            pushChar(&operatorStack, *token);
-            computeStack(&operatorStack, &operandStack);
+            handleFactorial(token);
+
+
         }
         else {
             if(strcmp(previousToken, "(") == 0) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value
