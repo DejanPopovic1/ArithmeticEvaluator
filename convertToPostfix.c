@@ -66,6 +66,34 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     return isThereAnythingToFlush;
 }
 
+//signage, flushedOperator, token
+
+void handleNumber(char *signage, char *flushedOperator, char *token){
+    if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
+        while(isFlushedOperatorLessThanOrEqualTopStackElement(*flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
+            computeStack(&operatorStack, &operandStack); //Compute the stacks
+        }
+        pushChar(&operatorStack, *flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
+        (*signage == '-') ? pushNum(&operandStack, (-1)*strtod(token, NULL)) : pushNum(&operandStack, strtod(token, NULL));//The number was pushed appropriately
+    }
+    else {//There was nothing to flush and we are trying to add a digit as above
+        pushNum(&operandStack, strtod(token, NULL));
+    }
+}
+
+void handleOpenParenthesis(char *signage, char *flushedOperator, char *token){
+    if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
+        while(isFlushedOperatorLessThanOrEqualTopStackElement(*flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
+            computeStack(&operatorStack, &operandStack); //Compute the stacks
+        }
+        pushChar(&operatorStack, *flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
+        (*signage == '-') ? pushNum(&operandStack, (-1)*strtod(token, NULL)) : pushNum(&operandStack, strtod(token, NULL));//The number was pushed appropriately
+    }
+    else {//There was nothing to flush and we are trying to add a digit as above
+        pushNum(&operandStack, strtod(token, NULL));
+    }
+}
+
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
     char previousToken[MAX_TOKEN_LENGTH];
@@ -80,18 +108,12 @@ void calculateArithmeticExpression(char *infix){
             break;
         }
         if(isdigit(*token)) {
-            if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
-                while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
-                    computeStack(&operatorStack, &operandStack); //Compute the stacks
-                }
-                pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
-                (signage == '-') ? pushNum(&operandStack, (-1)*strtod(token, NULL)) : pushNum(&operandStack, strtod(token, NULL));//The number was pushed appropriately
-            }
-            else {//There was nothing to flush and we are trying to add a digit as above
-                pushNum(&operandStack, strtod(token, NULL));
-            }
+
+            handleNumber(&signage, &flushedOperator, token);
+
         }
         else if(strcmp(token, "(") == 0) {
+
             if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a opening parenthesis as above
                 while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
                     computeStack(&operatorStack, &operandStack); //Compute the stacks

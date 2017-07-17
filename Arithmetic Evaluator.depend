@@ -2,7 +2,7 @@
 1494845569 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\inputandprintingutilities.c
 	"inputAndPrintingUtilities.h"
 
-1494602364 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
+1499844454 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\main.c
 	<stdio.h>
 	<stdlib.h>
 	"convertToPostfix.h"
@@ -11,10 +11,16 @@
 1494271511 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>
 
-1494851907 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+1500292681 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	"stackUtilities.h"
 
-1495467749 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1494851907 ated upstream
+
+1500292803 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+	"convertToPostfix.h"
+	"tokenizer.h"
+
+1500292509 shed changes
 	"convertToPostfix.h"
 	"tokenizer.h"
 
@@ -39,7 +45,7 @@
 1494323798 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stringutilities.c
 	"stringUtilities.h"
 
-1495467668 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.h
+1500292681 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.h
 	<stdbool.h>
 	<stdio.h>
 	<stdlib.h>
@@ -66,7 +72,7 @@
 	<stdlib.h>
 	"stackUtilities.h"
 
-1495462647 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.c
+1500292681 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.c
 	"tokenizer.h"
 
 1494575687 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\tokenizer.h
