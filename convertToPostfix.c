@@ -66,8 +66,6 @@ bool flushBufferedOperatorStack(char *signage, char *flushedOperator) {
     return isThereAnythingToFlush;
 }
 
-//signage, flushedOperator, token
-
 void handleNumber(char *signage, char *flushedOperator, char *token){
     if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
         while(isFlushedOperatorLessThanOrEqualTopStackElement(*flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
@@ -82,15 +80,22 @@ void handleNumber(char *signage, char *flushedOperator, char *token){
 }
 
 void handleOpenParenthesis(char *signage, char *flushedOperator, char *token){
-    if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a digit as above
+    if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a opening parenthesis as above
         while(isFlushedOperatorLessThanOrEqualTopStackElement(*flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
             computeStack(&operatorStack, &operandStack); //Compute the stacks
         }
         pushChar(&operatorStack, *flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
-        (*signage == '-') ? pushNum(&operandStack, (-1)*strtod(token, NULL)) : pushNum(&operandStack, strtod(token, NULL));//The number was pushed appropriately
+        if(*signage == '+') {//The opening parenthesis was pushed appropriately
+            pushChar(&operatorStack, *token);
+        }
+        else {//An invisible '-1' is pushed onto the number stack. An invisible * is pushed onto the operator stack. The opening parenthesis was pushed appropriately
+            pushNum(&operandStack, (double)(-1));
+            pushChar(&operatorStack, '*');
+            pushChar(&operatorStack, *token);
+        }
     }
-    else {//There was nothing to flush and we are trying to add a digit as above
-        pushNum(&operandStack, strtod(token, NULL));
+    else {//There was nothing to flush and we are trying to add an opening parenthesis as above. This will happen either as (1+1) or 1+((1+1)+1)
+        pushChar(&operatorStack, *token);
     }
 }
 
@@ -108,31 +113,13 @@ void calculateArithmeticExpression(char *infix){
             break;
         }
         if(isdigit(*token)) {
-
             handleNumber(&signage, &flushedOperator, token);
-
         }
         else if(strcmp(token, "(") == 0) {
-
-            if(flushBufferedOperatorStack(&signage, &flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a opening parenthesis as above
-                while(isFlushedOperatorLessThanOrEqualTopStackElement(flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
-                    computeStack(&operatorStack, &operandStack); //Compute the stacks
-                }
-                pushChar(&operatorStack, flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
-                if(signage == '+') {//The opening parenthesis was pushed appropriately
-                    pushChar(&operatorStack, *token);
-                }
-                else {//An invisible '-1' is pushed onto the number stack. An invisible * is pushed onto the operator stack. The opening parenthesis was pushed appropriately
-                    pushNum(&operandStack, (double)(-1));
-                    pushChar(&operatorStack, '*');
-                    pushChar(&operatorStack, *token);
-                }
-            }
-            else {//There was nothing to flush and we are trying to add an opening parenthesis as above. This will happen either as (1+1) or 1+((1+1)+1)
-                pushChar(&operatorStack, *token);
-            }
+            handleOpenParenthesis(&signage, &flushedOperator, token);
         }
         else if(strcmp(token, ")") == 0) {
+            //handleClosedParenthesis(&signage, &flushedOperator, token);
             while (peekChar(operatorStack) != '(') {
                 computeStack(&operatorStack, &operandStack);
             }
