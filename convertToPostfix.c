@@ -99,6 +99,13 @@ void handleOpenParenthesis(char *signage, char *flushedOperator, char *token){
     }
 }
 
+void handleClosedParenthesis(){
+    while (peekChar(operatorStack) != '(') {
+        computeStack(&operatorStack, &operandStack);
+    }
+    popChar(&operatorStack);
+}
+
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
     char previousToken[MAX_TOKEN_LENGTH];
@@ -119,11 +126,7 @@ void calculateArithmeticExpression(char *infix){
             handleOpenParenthesis(&signage, &flushedOperator, token);
         }
         else if(strcmp(token, ")") == 0) {
-            //handleClosedParenthesis(&signage, &flushedOperator, token);
-            while (peekChar(operatorStack) != '(') {
-                computeStack(&operatorStack, &operandStack);
-            }
-            popChar(&operatorStack);
+            handleClosedParenthesis();
         }
         else if (strcmp(token, "!") == 0) {
             pushNum(&operandStack, (double)1);//This is a dummy addition to the stack used so that we dont have to complicate compute stack. It gets popped never to be used
