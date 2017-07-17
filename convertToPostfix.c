@@ -112,6 +112,13 @@ void handleFactorial(char *token){
     computeStack(&operatorStack, &operandStack);
 }
 
+void handleOperator(char *previousToken, char *token){
+    if(strcmp(previousToken, "(") == 0) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value
+        pushNum(&operandStack, 0);
+    }
+    pushChar(&bufferedOperatorStack, *token);//An operator was reached
+}
+
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
     char previousToken[MAX_TOKEN_LENGTH];
@@ -136,14 +143,9 @@ void calculateArithmeticExpression(char *infix){
         }
         else if (strcmp(token, "!") == 0) {
             handleFactorial(token);
-
-
         }
-        else {
-            if(strcmp(previousToken, "(") == 0) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value
-                pushNum(&operandStack, 0);
-            }
-            pushChar(&bufferedOperatorStack, *token);//An operator was reached
+        else {//Token is an operator
+            handleOperator(previousToken, token);
         }
         strcpy(previousToken, token);
         if(!(strcmp(token, "") == 0)) {
