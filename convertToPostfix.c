@@ -6,7 +6,7 @@ struct CharStack bufferedOperatorStack = {.stackPointer = 0};
 struct NumStack operandStack = {.stackPointer = 0};
 
 /*Although '(' and ')' has higher precedence than all other operators, it must be any value lower than the other operators to ensure its priority*/
-struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'!', 4}, {'(', 0}, {')', 0}};
+struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'!', 4}, {'(', 0}, {')', 0}, {'|', 0}};
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
@@ -119,6 +119,23 @@ void handleOperator(char *previousToken, char *token){
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
 }
 
+void handleClosingModulo(char *token){
+    while (peekChar(operatorStack) != '|') {
+        computeStack(&operatorStack, &operandStack);
+    }
+    popChar(&operatorStack);
+    pushChar(&operandStack, absoluteValue(popChar(&operandStack)));
+}
+
+void handleModulus(char *token){
+    if(containsChar(&operatorStack, token) < 0){
+        pushChar(&operatorStack, token);
+    }
+    else if(containsChar(&operatorStack, token) >= 0){
+        handleClosingModulo(token);
+    }
+}
+
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
     char previousToken[MAX_TOKEN_LENGTH];
@@ -143,6 +160,9 @@ void calculateArithmeticExpression(char *infix){
         }
         else if (strcmp(token, "!") == 0) {
             handleFactorial(token);
+        }
+        else if (strcmp(token, "|") == 0) {
+            handleModulus(token);
         }
         else {//Token is an operator
             handleOperator(previousToken, token);

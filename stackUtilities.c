@@ -28,6 +28,19 @@ char peekChar(struct CharStack stack){
     return stack.stackValues[--stack.stackPointer];
 }
 
+int containsChar(struct CharStack stack, char token){
+    if(!stack.stackPointer){
+        fprintf(stderr, "Character Stack is empty, doesn't contain anything \n");
+        exit(-1);
+    }
+    for(int i = 0; i <stack.stackPointer; i++){
+        if(stack.stackValues[i] == token){
+            return stack.stackPointer;
+        }
+        return -1;
+    }
+}
+
 void pushNum(struct NumStack *stack, double pushedValue){
     if (stack -> stackPointer < MAX_STACK_SIZE) {
         stack -> stackValues[stack -> stackPointer++] = pushedValue;
