@@ -100,8 +100,14 @@ void handleOpenParenthesis(char *signage, char *flushedOperator, char *token){
 }
 
 void handleClosedParenthesis(){
-
     while (peekChar(operatorStack) != '(') {
+        computeStack(&operatorStack, &operandStack);
+    }
+    popChar(&operatorStack);
+}
+
+void handleClosedModulus(){
+    while (peekChar(operatorStack) != '|') {
         computeStack(&operatorStack, &operandStack);
     }
     popChar(&operatorStack);
@@ -114,17 +120,10 @@ void handleFactorial(char *token){
 }
 
 void handleOperator(char *previousToken, char *token){
-    if(strcmp(previousToken, "(") == 0) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value
+    if(strcmp(previousToken, "(") == 0 || (strcmp(previousToken, "|") == 0 && (containsChar(operatorStack, "|") >= 0) )) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value. This also applies to modulo that hasnt been computed. So the following works: |-3|*2
         pushNum(&operandStack, 0);
     }
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
-}
-
-void handleClosedModulus(){
-    while (peekChar(operatorStack) != '|') {
-        computeStack(&operatorStack, &operandStack);
-    }
-    popChar(&operatorStack);
 }
 
 void handleModulus(char *signage, char *flushedOperator, char *token){
