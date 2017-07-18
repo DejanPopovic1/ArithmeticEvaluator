@@ -28,10 +28,10 @@ char peekChar(struct CharStack stack){
     return stack.stackValues[--stack.stackPointer];
 }
 
-int containsChar(struct CharStack stack, char token){
-    printf("%d", stack.stackPointer);
+int containsChar(struct CharStack stack, char *token){
+    //printf("%d", stack.stackPointer);
     for(int i = 0; i < stack.stackPointer; i++){
-        if(stack.stackValues[i] == token){
+        if(stack.stackValues[i] == *token){
             return i;
         }
     }

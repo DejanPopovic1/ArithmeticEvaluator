@@ -128,10 +128,10 @@ void handleClosedModulus(){
 }
 
 void handleModulus(char *signage, char *flushedOperator, char *token){
-    if(containsChar(&operatorStack, token) < 0){
+    if(containsChar(operatorStack, token) < 0){
         handleOpenParenthesis(signage, flushedOperator, token);
     }
-    else if(containsChar(&operatorStack, token) >= 0){
+    else if(containsChar(operatorStack, token) >= 0){
         handleClosedModulus();
     }
 }
@@ -171,9 +171,9 @@ void calculateArithmeticExpression(char *infix){
         if(!(strcmp(token, "") == 0)) {
             free(token);
         }
-        printCharacterStack(operatorStack);
-        printf("%d", operatorStack.stackPointer);
-        printDoubleStack(operandStack);
+        //printCharacterStack(operatorStack);
+        //printf("%d", operatorStack.stackPointer);
+        //printDoubleStack(operandStack);
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
