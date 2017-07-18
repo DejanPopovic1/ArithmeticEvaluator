@@ -80,7 +80,7 @@ void handleNumber(char *signage, char *flushedOperator, char *token){
 }
 
 void handleOpenParenthesis(char *signage, char *flushedOperator, char *token){
-    if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add a opening parenthesis as above
+    if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add an opening parenthesis as above
         while(isFlushedOperatorLessThanOrEqualTopStackElement(*flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
             computeStack(&operatorStack, &operandStack); //Compute the stacks
         }
@@ -100,6 +100,7 @@ void handleOpenParenthesis(char *signage, char *flushedOperator, char *token){
 }
 
 void handleClosedParenthesis(){
+
     while (peekChar(operatorStack) != '(') {
         computeStack(&operatorStack, &operandStack);
     }
@@ -119,20 +120,19 @@ void handleOperator(char *previousToken, char *token){
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
 }
 
-void handleClosingModulus(char *token){
+void handleClosedModulus(){
     while (peekChar(operatorStack) != '|') {
         computeStack(&operatorStack, &operandStack);
     }
     popChar(&operatorStack);
-    pushChar(&operandStack, absoluteValue(popChar(&operandStack)));
 }
 
-void handleModulus(char *token){
+void handleModulus(char *signage, char *flushedOperator, char *token){
     if(containsChar(&operatorStack, token) < 0){
-        pushChar(&operatorStack, token);
+        handleOpenParenthesis(signage, flushedOperator, token);
     }
     else if(containsChar(&operatorStack, token) >= 0){
-        handleClosingModulus(token);
+        handleClosedModulus();
     }
 }
 
@@ -162,7 +162,7 @@ void calculateArithmeticExpression(char *infix){
             handleFactorial(token);
         }
         else if (strcmp(token, "|") == 0) {
-            handleModulus(token);
+            handleModulus(&signage, &flushedOperator, token);
         }
         else {//Token is an operator
             handleOperator(previousToken, token);
@@ -171,6 +171,9 @@ void calculateArithmeticExpression(char *infix){
         if(!(strcmp(token, "") == 0)) {
             free(token);
         }
+        printCharacterStack(operatorStack);
+        printf("%d", operatorStack.stackPointer);
+        printDoubleStack(operandStack);
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);

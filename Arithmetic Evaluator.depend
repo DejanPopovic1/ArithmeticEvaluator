@@ -11,12 +11,12 @@
 1494271511 c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\arithmeticevaluator.h
 	<stdbool.h>
 
-1500307121 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
+1500374728 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\stackutilities.c
 	"stackUtilities.h"
 
 1494851907 ated upstream
 
-1500306096 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
+1500376126 source:c:\users\dejanp\documents\c_c++ code\arithmetic evaluator\converttopostfix.c
 	"convertToPostfix.h"
 	"tokenizer.h"
 

@@ -29,11 +29,8 @@ char peekChar(struct CharStack stack){
 }
 
 int containsChar(struct CharStack stack, char token){
-    if(!stack.stackPointer){
-        fprintf(stderr, "Character Stack is empty, doesn't contain anything \n");
-        exit(-1);
-    }
-    for(int i = 0; i <stack.stackPointer; i++){
+    printf("%d", stack.stackPointer);
+    for(int i = 0; i < stack.stackPointer; i++){
         if(stack.stackValues[i] == token){
             return i;
         }
