@@ -120,25 +120,33 @@ void handleOperator(char *previousToken, char *token){
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
 }
 
-void handleClosedModulus(){
+void handleClosedModulusOLD(){
     while (peekChar(operatorStack) != '|') {
         computeStack(&operatorStack, &operandStack);
     }
     popChar(&operatorStack);
 }
 
-void handleModulus(char *signage, char *flushedOperator, char *token){
+void handleModulusOLD(char *signage, char *flushedOperator, char *token){
     if(containsChar(&operatorStack, token) < 0){
         handleOpenParenthesis(signage, flushedOperator, token);
     }
     else if(containsChar(&operatorStack, token) >= 0){
-        handleClosedModulus();
+        handleClosedModulusOLD();
     }
 }
 
+void handleOpenAbsoluteValue(char* token){
+
+};
+
+void handleClosedAbsoluteValue(char* token){
+
+};
+
 void calculateArithmeticExpression(char *infix){
     char *token = "0";
-    char previousToken[MAX_TOKEN_LENGTH];
+    char previousToken[MAX_TOKEN_LENGTH] = START_OF_STRING;
     char signage;
     char flushedOperator;
     if(*infix == '-' || *infix == '+') {
@@ -161,10 +169,15 @@ void calculateArithmeticExpression(char *infix){
         else if (strcmp(token, "!") == 0) {
             handleFactorial(token);
         }
-        else if (strcmp(token, "|") == 0) {
-            handleModulus(&signage, &flushedOperator, token);
+        else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == false || previousToken == START_OF_STRING || previousToken == OPEN_ABSOLUTE_VALUE)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleOpenAbsoluteValue(token);
         }
-        else {//Token is an operator
+        else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == true || previousToken == CLOSED_ABSOLUTE_VALUE)) {
+            strcpy(token, CLOSED_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+        }
+        else {//Token is an operator. PLEASE MAKE THIS EXPLICIT
             handleOperator(previousToken, token);
         }
         strcpy(previousToken, token);

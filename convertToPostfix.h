@@ -12,6 +12,9 @@
 #include "inputAndPrintingUtilities.h"
 
 #define SIZE_OF_PRECEDENCE_ARRAY 9
+#define START_OF_STRING "S"
+#define OPEN_ABSOLUTE_VALUE "//"
+#define CLOSED_ABSOLUTE_VALUE "\\"
 
 struct precedence{
     char arithmeticOperator;
