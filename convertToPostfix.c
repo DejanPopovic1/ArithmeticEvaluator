@@ -7,6 +7,7 @@ struct NumStack operandStack = {.stackPointer = 0};
 
 /*Although '(' and ')' has higher precedence than all other operators, it must be any value lower than the other operators to ensure its priority*/
 struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'!', 4}, {'(', 0}, {')', 0}, {'|', 0}};
+char* operators[SIZE_OF_OPERATOR_ARRAY] = {"+", "-", "*", "/", "^"};
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
@@ -172,10 +173,12 @@ void calculateArithmeticExpression(char *infix){
         else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == false || previousToken == START_OF_STRING || previousToken == OPEN_ABSOLUTE_VALUE)) {
             strcpy(token, OPEN_ABSOLUTE_VALUE);
             handleOpenAbsoluteValue(token);
+            printf("OPEN_ABSOLUTE_VALUE\n");
         }
         else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == true || previousToken == CLOSED_ABSOLUTE_VALUE)) {
             strcpy(token, CLOSED_ABSOLUTE_VALUE);
             handleClosedAbsoluteValue(token);
+            printf("CLOSING_ABSOLUTE_VALUE\n");
         }
         else {//Token is an operator. PLEASE MAKE THIS EXPLICIT
             handleOperator(previousToken, token);
@@ -184,9 +187,9 @@ void calculateArithmeticExpression(char *infix){
         if(!(strcmp(token, "") == 0)) {
             free(token);
         }
-        printCharacterStack(operatorStack);
-        printf("%d", operatorStack.stackPointer);
-        printDoubleStack(operandStack);
+        //printCharacterStack(operatorStack);
+        //printf("%d", operatorStack.stackPointer);
+        //printDoubleStack(operandStack);
     }
     while(operatorStack.stackPointer > 0) {
         computeStack(&operatorStack, &operandStack);
