@@ -7,15 +7,25 @@ struct NumStack operandStack = {.stackPointer = 0};
 
 /*Although '(' and ')' has higher precedence than all other operators, it must be any value lower than the other operators to ensure its priority*/
 struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'!', 4}, {'(', 0}, {')', 0}, {'|', 0}};
-char* operatorsBeforeOpeningAbsoluteValue[SIZE_OF_OPERATOR_ARRAY] = {"+", "-", "*", "/", "^", "("};
-char* operatorsBeforeClosingAbsoluteValue[SIZE_OF_OPERATOR_ARRAY] = {")"};
+char *operatorsBeforeOpeningAbsoluteValue[SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY] = {"+", "-", "*", "/", "^", "("};
+char *operatorsBeforeClosingAbsoluteValue[SIZE_OF_OPERATORS_BEFORE_CLOSING_ABSOLUTE_VALUE_ARRAY] = {")"};
 
-bool isFirstLessThanOrEqualSecond(char a, char b){
+bool isFirstLessThanOrEqualSecond(char a, char b) {
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
     return (result <= 0) ? true : false;
 }
 
-int linearSearch(char searchChar, struct precedence *arrayToSearch){
+int linearOperatorSearch(char *searchString, char *arrayToSearch[], int sizeOfArray) {
+    int i;
+    for(i = 0; i < sizeOfArray; i++) {
+        if(strcmp(arrayToSearch[i], searchString) == 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int linearSearch(char searchChar, struct precedence *arrayToSearch) {
     int i;
     for(i = 0; i < SIZE_OF_PRECEDENCE_ARRAY; i++) {
         if(arrayToSearch[i].arithmeticOperator == searchChar) {
@@ -25,7 +35,7 @@ int linearSearch(char searchChar, struct precedence *arrayToSearch){
     return -1;
 }
 
-bool isFlushedOperatorLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack){
+bool isFlushedOperatorLessThanOrEqualTopStackElement(char comparitor, struct CharStack operatorStack) {
     if(operatorStack.stackPointer == 0) {
         return false;
     }
@@ -157,7 +167,10 @@ void calculateArithmeticExpression(char *infix){
     if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
+    printf("%d\n\n\n", linearOperatorSearch("/", operatorsBeforeOpeningAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY));
     while(1) {
+
+
         token = getToken(&infix, precedenceArray);
         if (strcmp(token, "") == 0) {
             break;
