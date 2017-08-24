@@ -167,10 +167,8 @@ void calculateArithmeticExpression(char *infix){
     if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
-    printf("%d\n\n\n", linearOperatorSearch("(", operatorsBeforeOpeningAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY));
+    //printf("%d\n\n\n", linearOperatorSearch("(", operatorsBeforeOpeningAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY));
     while(1) {
-
-
         token = getToken(&infix, precedenceArray);
         if (strcmp(token, "") == 0) {
             break;
@@ -188,12 +186,12 @@ void calculateArithmeticExpression(char *infix){
             handleFactorial(token);
         }
         //|| strcmp(previousToken, "+") == 0 || strcmp(previousToken, "-") == 0 || strcmp(previousToken, "*") == 0 || strcmp(previousToken, "/") == 0 || strcmp(previousToken, "^") == 0
-        else if (strcmp(token, "|") == 0 && (( strcmp(previousToken, START_OF_STRING)  == 0 ) || (strcmp(previousToken, OPEN_ABSOLUTE_VALUE) == 0) || linearOperatorSearch(previousToken, operatorsBeforeOpeningAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY) >= 0)) {
+        else if (strcmp(token, "|") == 0 && (( strcmp(previousToken, START_OF_STRING)  == 0 ) || (strcmp(previousToken, OPEN_ABSOLUTE_VALUE) == 0) || linearOperatorSearch(previousToken, operatorsBeforeOpeningAbsoluteValue, sizeof(operatorsBeforeOpeningAbsoluteValue)/sizeof(char *)) >= 0)) {
             strcpy(token, OPEN_ABSOLUTE_VALUE);
             handleClosedAbsoluteValue(token);
             printf("OPENING_ABSOLUTE_VALUE (Third Rule)\n");
         }
-        else if (strcmp(token, "|") == 0 && ((isdigit(*previousToken)) || strcmp(previousToken, CLOSED_ABSOLUTE_VALUE) == 0 || linearOperatorSearch(previousToken, operatorsBeforeClosingAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY) >= 0)) {
+        else if (strcmp(token, "|") == 0 && ((isdigit(*previousToken)) || strcmp(previousToken, CLOSED_ABSOLUTE_VALUE) == 0 || linearOperatorSearch(previousToken, operatorsBeforeClosingAbsoluteValue, sizeof(operatorsBeforeOpeningAbsoluteValue)/sizeof(char *)) >= 0)) {
             strcpy(token, CLOSED_ABSOLUTE_VALUE);
             handleClosedAbsoluteValue(token);
             printf("CLOSING_ABSOLUTE_VALUE\n");
