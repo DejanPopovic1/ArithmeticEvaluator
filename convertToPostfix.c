@@ -167,7 +167,7 @@ void calculateArithmeticExpression(char *infix){
     if(*infix == '-' || *infix == '+') {
         pushNum(&operandStack, (double)('0' - '0'));
     }
-    printf("%d\n\n\n", linearOperatorSearch("/", operatorsBeforeOpeningAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY));
+    printf("%d\n\n\n", linearOperatorSearch("(", operatorsBeforeOpeningAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY));
     while(1) {
 
 
@@ -203,55 +203,11 @@ void calculateArithmeticExpression(char *infix){
         }
 
 
-        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "+") == 0)) {
+        else if (strcmp(token, "|") == 0 && (linearOperatorSearch(previousToken, operatorsBeforeOpeningAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY) >= 0)) {
             strcpy(token, OPEN_ABSOLUTE_VALUE);
             handleClosedAbsoluteValue(token);
             printf("OPENING_ABSOLUTE_VALUE (Third Rule)\n");
         }
-        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "-") == 0)) {
-            strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleClosedAbsoluteValue(token);
-            printf("OPENING_ABSOLUTE_VALUE (Fourth Rule)\n");
-        }
-        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "*") == 0)) {
-            strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleClosedAbsoluteValue(token);
-            printf("OPENING_ABSOLUTE_VALUE (Fifth Rule)\n");
-        }
-        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "/") == 0)) {
-            strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleClosedAbsoluteValue(token);
-            printf("OPENING_ABSOLUTE_VALUE (Sixth Rule)\n");
-        }
-        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "^") == 0)) {
-            strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleClosedAbsoluteValue(token);
-            printf("OPENING_ABSOLUTE_VALUE (Second Rule)\n");
-        }
-        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "(") == 0)) {
-            strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleClosedAbsoluteValue(token);
-            printf("OPENING_ABSOLUTE_VALUE (Second Rule)\n");
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //else if (strcmp(token, "|") == 0 && (previousToken == START_OF_STRING || previousToken == OPEN_ABSOLUTE_VALUE || strcmp(previousToken, "+")|| strcmp(previousToken, "-") || strcmp(previousToken, "*") || strcmp(previousToken, "/") || strcmp(previousToken, "^") || !isdigit(*previousToken))) {
-        //    strcpy(token, OPEN_ABSOLUTE_VALUE);
-        //    handleOpenAbsoluteValue(token);
-        //    printf("OPEN_ABSOLUTE_VALUE\n");
-        //}
-
         else if (strcmp(token, "|") == 0 && (isdigit(*previousToken))) {
             strcpy(token, CLOSED_ABSOLUTE_VALUE);
             handleClosedAbsoluteValue(token);
@@ -262,21 +218,11 @@ void calculateArithmeticExpression(char *infix){
             handleClosedAbsoluteValue(token);
             printf("CLOSING_ABSOLUTE_VALUE\n");
         }
-        else if (strcmp(token, "|") == 0 && strcmp(previousToken, ")") == 0) {
+        else if (strcmp(token, "|") == 0 && (linearOperatorSearch(previousToken, operatorsBeforeClosingAbsoluteValue, SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY) >= 0)) {
             strcpy(token, CLOSED_ABSOLUTE_VALUE);
             handleClosedAbsoluteValue(token);
             printf("CLOSING_ABSOLUTE_VALUE\n");
         }
-
-
-
-
-
-        //else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == true || previousToken == CLOSED_ABSOLUTE_VALUE)) {
-        //    strcpy(token, CLOSED_ABSOLUTE_VALUE);
-        //    handleClosedAbsoluteValue(token);
-        //    printf("CLOSING_ABSOLUTE_VALUE\n");
-        //}
         else {//Token is an operator. PLEASE MAKE THIS EXPLICIT
             handleOperator(previousToken, token);
         }
