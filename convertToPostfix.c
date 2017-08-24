@@ -7,7 +7,8 @@ struct NumStack operandStack = {.stackPointer = 0};
 
 /*Although '(' and ')' has higher precedence than all other operators, it must be any value lower than the other operators to ensure its priority*/
 struct precedence precedenceArray[SIZE_OF_PRECEDENCE_ARRAY] = {{'+', 1}, {'-', 1}, {'*', 2}, {'/', 2}, {'^', 3}, {'!', 4}, {'(', 0}, {')', 0}, {'|', 0}};
-char* operators[SIZE_OF_OPERATOR_ARRAY] = {"+", "-", "*", "/", "^"};
+char* operatorsBeforeOpeningAbsoluteValue[SIZE_OF_OPERATOR_ARRAY] = {"+", "-", "*", "/", "^", "("};
+char* operatorsBeforeClosingAbsoluteValue[SIZE_OF_OPERATOR_ARRAY] = {")"};
 
 bool isFirstLessThanOrEqualSecond(char a, char b){
     int result = linearSearch(a, precedenceArray) - linearSearch(b, precedenceArray);
@@ -121,33 +122,36 @@ void handleOperator(char *previousToken, char *token){
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
 }
 
-void handleClosedModulusOLD(){
-    while (peekChar(operatorStack) != '|') {
-        computeStack(&operatorStack, &operandStack);
-    }
-    popChar(&operatorStack);
-}
+//void handleClosedModulusOLD(){
+//    while (peekChar(operatorStack) != '|') {
+//        computeStack(&operatorStack, &operandStack);
+//    }
+//    popChar(&operatorStack);
+//}
 
-void handleModulusOLD(char *signage, char *flushedOperator, char *token){
-    if(containsChar(&operatorStack, token) < 0){
-        handleOpenParenthesis(signage, flushedOperator, token);
-    }
-    else if(containsChar(&operatorStack, token) >= 0){
-        handleClosedModulusOLD();
-    }
-}
+//void handleModulusOLD(char *signage, char *flushedOperator, char *token){
+//    if(containsChar(&operatorStack, token) < 0){
+//        handleOpenParenthesis(signage, flushedOperator, token);
+//    }
+//    else if(containsChar(&operatorStack, token) >= 0){
+//        handleClosedModulusOLD();
+//    }
+//}
 
-void handleOpenAbsoluteValue(char* token){
+void handleOpenAbsoluteValue(char *token){
 
 };
 
-void handleClosedAbsoluteValue(char* token){
+void handleClosedAbsoluteValue(char *token){
 
 };
 
 void calculateArithmeticExpression(char *infix){
-    char *token = "0";
-    char previousToken[MAX_TOKEN_LENGTH] = START_OF_STRING;
+    //char *token = "0";
+    char tokenInitialiser[] = "0";
+    char *token = NULL;
+    char previousTokenInitialiser[MAX_TOKEN_LENGTH] = START_OF_STRING;
+    char *previousToken = previousTokenInitialiser;
     char signage;
     char flushedOperator;
     if(*infix == '-' || *infix == '+') {
@@ -170,16 +174,96 @@ void calculateArithmeticExpression(char *infix){
         else if (strcmp(token, "!") == 0) {
             handleFactorial(token);
         }
-        else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == false || previousToken == START_OF_STRING || previousToken == OPEN_ABSOLUTE_VALUE)) {
+        //|| strcmp(previousToken, "+") == 0 || strcmp(previousToken, "-") == 0 || strcmp(previousToken, "*") == 0 || strcmp(previousToken, "/") == 0 || strcmp(previousToken, "^") == 0
+
+
+
+        else if (strcmp(token, "|") == 0 && ( strcmp(previousToken, START_OF_STRING)  == 0 )) {
             strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleOpenAbsoluteValue(token);
-            printf("OPEN_ABSOLUTE_VALUE\n");
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (First Rule)\n");
         }
-        else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == true || previousToken == CLOSED_ABSOLUTE_VALUE)) {
+        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, OPEN_ABSOLUTE_VALUE) == 0)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (Second Rule)\n");
+        }
+
+
+        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "+") == 0)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (Third Rule)\n");
+        }
+        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "-") == 0)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (Fourth Rule)\n");
+        }
+        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "*") == 0)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (Fifth Rule)\n");
+        }
+        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "/") == 0)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (Sixth Rule)\n");
+        }
+        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "^") == 0)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (Second Rule)\n");
+        }
+        else if (strcmp(token, "|") == 0 && (strcmp(previousToken, "(") == 0)) {
+            strcpy(token, OPEN_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("OPENING_ABSOLUTE_VALUE (Second Rule)\n");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //else if (strcmp(token, "|") == 0 && (previousToken == START_OF_STRING || previousToken == OPEN_ABSOLUTE_VALUE || strcmp(previousToken, "+")|| strcmp(previousToken, "-") || strcmp(previousToken, "*") || strcmp(previousToken, "/") || strcmp(previousToken, "^") || !isdigit(*previousToken))) {
+        //    strcpy(token, OPEN_ABSOLUTE_VALUE);
+        //    handleOpenAbsoluteValue(token);
+        //    printf("OPEN_ABSOLUTE_VALUE\n");
+        //}
+
+        else if (strcmp(token, "|") == 0 && (isdigit(*previousToken))) {
             strcpy(token, CLOSED_ABSOLUTE_VALUE);
             handleClosedAbsoluteValue(token);
             printf("CLOSING_ABSOLUTE_VALUE\n");
         }
+        else if (strcmp(token, "|") == 0 && strcmp(previousToken, CLOSED_ABSOLUTE_VALUE) == 0) {
+            strcpy(token, CLOSED_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("CLOSING_ABSOLUTE_VALUE\n");
+        }
+        else if (strcmp(token, "|") == 0 && strcmp(previousToken, ")") == 0) {
+            strcpy(token, CLOSED_ABSOLUTE_VALUE);
+            handleClosedAbsoluteValue(token);
+            printf("CLOSING_ABSOLUTE_VALUE\n");
+        }
+
+
+
+
+
+        //else if (strcmp(token, "|") == 0 && (isdigit(*previousToken) == true || previousToken == CLOSED_ABSOLUTE_VALUE)) {
+        //    strcpy(token, CLOSED_ABSOLUTE_VALUE);
+        //    handleClosedAbsoluteValue(token);
+        //    printf("CLOSING_ABSOLUTE_VALUE\n");
+        //}
         else {//Token is an operator. PLEASE MAKE THIS EXPLICIT
             handleOperator(previousToken, token);
         }

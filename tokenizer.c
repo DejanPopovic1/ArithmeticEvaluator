@@ -29,6 +29,7 @@ char *getToken(char **unparsedInput, struct precedence precedenceArray[]){
         return token;
     }
     else {
+        printf("%s\n", token);
         fprintf(stderr, "Invalid input character(s)\n");
         exit(-1);
     }

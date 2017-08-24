@@ -22,11 +22,18 @@ struct precedence{
     int precedence;
 };
 
-int linearSearch(char, struct precedence *);
-bool flushBufferedOperatorStack(char *, char *);
-void calculateArithmeticExpression(char *);
-bool isFlushedOperatorLessThanOrEqualTopStackElement(char, struct CharStack);
 bool isFirstLessThanOrEqualSecond(char, char);
+int linearSearch(char, struct precedence *);
+bool isFlushedOperatorLessThanOrEqualTopStackElement(char, struct CharStack);
+bool flushBufferedOperatorStack(char *, char *);
+void handleNumber(char *, char *, char *);
+void handleOpenParenthesis(char *, char *, char *);
+void handleClosedParenthesis();
+void handleFactorial(char *);
+void handleOperator(char *, char *);
+void handleOpenAbsoluteValue(char *);
+void handleClosedAbsoluteValue(char *);
+void calculateArithmeticExpression(char *);
 void computeStack(struct CharStack *, struct NumStack *);
 
 #endif
