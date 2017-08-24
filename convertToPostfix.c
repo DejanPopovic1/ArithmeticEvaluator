@@ -112,7 +112,6 @@ void handleOpenParenthesis(char *signage, char *flushedOperator, char *token){
 }
 
 void handleClosedParenthesis(){
-
     while (peekChar(operatorStack) != '(') {
         computeStack(&operatorStack, &operandStack);
     }
@@ -132,32 +131,15 @@ void handleOperator(char *previousToken, char *token){
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
 }
 
-//void handleClosedModulusOLD(){
-//    while (peekChar(operatorStack) != '|') {
-//        computeStack(&operatorStack, &operandStack);
-//    }
-//    popChar(&operatorStack);
-//}
+void handleOpenAbsoluteValue(char *signage, char *flushedOperator, char *token){
+    ;
+}
 
-//void handleModulusOLD(char *signage, char *flushedOperator, char *token){
-//    if(containsChar(&operatorStack, token) < 0){
-//        handleOpenParenthesis(signage, flushedOperator, token);
-//    }
-//    else if(containsChar(&operatorStack, token) >= 0){
-//        handleClosedModulusOLD();
-//    }
-//}
-
-void handleOpenAbsoluteValue(char *token){
-
-};
-
-void handleClosedAbsoluteValue(char *token){
-
-};
+void handleClosedAbsoluteValue(){
+    ;
+}
 
 void calculateArithmeticExpression(char *infix){
-    //char *token = "0";
     char tokenInitialiser[] = "0";
     char *token = NULL;
     char previousTokenInitialiser[MAX_TOKEN_LENGTH] = START_OF_STRING;
@@ -185,15 +167,16 @@ void calculateArithmeticExpression(char *infix){
         else if (strcmp(token, "!") == 0) {
             handleFactorial(token);
         }
-        //|| strcmp(previousToken, "+") == 0 || strcmp(previousToken, "-") == 0 || strcmp(previousToken, "*") == 0 || strcmp(previousToken, "/") == 0 || strcmp(previousToken, "^") == 0
         else if (strcmp(token, "|") == 0 && (( strcmp(previousToken, START_OF_STRING)  == 0 ) || (strcmp(previousToken, OPEN_ABSOLUTE_VALUE) == 0) || linearOperatorSearch(previousToken, operatorsBeforeOpeningAbsoluteValue, sizeof(operatorsBeforeOpeningAbsoluteValue)/sizeof(char *)) >= 0)) {
             strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleClosedAbsoluteValue(token);
+            handleOpenAbsoluteValue(&signage, &flushedOperator, OPEN_ABSOLUTE_VALUE);
+            //handleOpenParenthesis(&signage, &flushedOperator, token);
             printf("OPENING_ABSOLUTE_VALUE (Third Rule)\n");
         }
         else if (strcmp(token, "|") == 0 && ((isdigit(*previousToken)) || strcmp(previousToken, CLOSED_ABSOLUTE_VALUE) == 0 || linearOperatorSearch(previousToken, operatorsBeforeClosingAbsoluteValue, sizeof(operatorsBeforeOpeningAbsoluteValue)/sizeof(char *)) >= 0)) {
             strcpy(token, CLOSED_ABSOLUTE_VALUE);
-            handleClosedAbsoluteValue(token);
+            handleClosedAbsoluteValue();
+            //handleClosedParenthesis();
             printf("CLOSING_ABSOLUTE_VALUE\n");
         }
         else {//Token is an operator. PLEASE MAKE THIS EXPLICIT

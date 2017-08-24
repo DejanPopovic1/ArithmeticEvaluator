@@ -15,8 +15,8 @@
 #define SIZE_OF_OPERATORS_BEFORE_OPENING_ABSOLUTE_VALUE_ARRAY 6
 #define SIZE_OF_OPERATORS_BEFORE_CLOSING_ABSOLUTE_VALUE_ARRAY 1
 #define START_OF_STRING "S"
-#define OPEN_ABSOLUTE_VALUE "//"
-#define CLOSED_ABSOLUTE_VALUE "\\"
+#define OPEN_ABSOLUTE_VALUE "{"
+#define CLOSED_ABSOLUTE_VALUE "}"
 
 struct precedence{
     char arithmeticOperator;
@@ -32,8 +32,8 @@ void handleOpenParenthesis(char *, char *, char *);
 void handleClosedParenthesis();
 void handleFactorial(char *);
 void handleOperator(char *, char *);
-void handleOpenAbsoluteValue(char *);
-void handleClosedAbsoluteValue(char *);
+void handleOpenAbsoluteValue(char *, char *, char *);
+void handleClosedAbsoluteValue();
 void calculateArithmeticExpression(char *);
 void computeStack(struct CharStack *, struct NumStack *);
 
