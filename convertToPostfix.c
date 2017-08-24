@@ -125,18 +125,38 @@ void handleFactorial(char *token){
 }
 
 void handleOperator(char *previousToken, char *token){
-    if(strcmp(previousToken, "(") == 0) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value
+    if(strcmp(previousToken, "(") == 0 || strcmp(previousToken, "{") == 0) {//An operator was reached AND it is immediately after an opening bracket, i.e, (-3). This adds a dummy zero value
         pushNum(&operandStack, 0);
     }
     pushChar(&bufferedOperatorStack, *token);//An operator was reached
 }
 
 void handleOpenAbsoluteValue(char *signage, char *flushedOperator, char *token){
-    ;
+    if(flushBufferedOperatorStack(signage, flushedOperator)) {//There was something to flush and it was flushed and we are trying to add an opening parenthesis as above
+        while(isFlushedOperatorLessThanOrEqualTopStackElement(*flushedOperator, operatorStack)) {//While the flushed operator is of lesser precedence than the operator at the top of the operator stack
+            computeStack(&operatorStack, &operandStack); //Compute the stacks
+        }
+        pushChar(&operatorStack, *flushedOperator); //Until it is finally of greater precdence in which case we can finally push it onto the character stack
+        if(*signage == '+') {//The opening parenthesis was pushed appropriately
+            pushChar(&operatorStack, *token);
+        }
+        else {//An invisible '-1' is pushed onto the number stack. An invisible * is pushed onto the operator stack. The opening parenthesis was pushed appropriately
+            pushNum(&operandStack, (double)(-1));
+            pushChar(&operatorStack, '*');
+            pushChar(&operatorStack, *token);
+        }
+    }
+    else {//There was nothing to flush and we are trying to add an opening parenthesis as above. This will happen either as (1+1) or 1+((1+1)+1)
+        pushChar(&operatorStack, *token);
+    }
 }
 
 void handleClosedAbsoluteValue(){
-    ;
+    while (peekChar(operatorStack) != '{') {
+        computeStack(&operatorStack, &operandStack);
+    }
+    pushNum(&operandStack, -1 * popNum(&operandStack));
+    popChar(&operatorStack);
 }
 
 void calculateArithmeticExpression(char *infix){
@@ -169,7 +189,7 @@ void calculateArithmeticExpression(char *infix){
         }
         else if (strcmp(token, "|") == 0 && (( strcmp(previousToken, START_OF_STRING)  == 0 ) || (strcmp(previousToken, OPEN_ABSOLUTE_VALUE) == 0) || linearOperatorSearch(previousToken, operatorsBeforeOpeningAbsoluteValue, sizeof(operatorsBeforeOpeningAbsoluteValue)/sizeof(char *)) >= 0)) {
             strcpy(token, OPEN_ABSOLUTE_VALUE);
-            handleOpenAbsoluteValue(&signage, &flushedOperator, OPEN_ABSOLUTE_VALUE);
+            handleOpenAbsoluteValue(&signage, &flushedOperator, token);
             //handleOpenParenthesis(&signage, &flushedOperator, token);
             printf("OPENING_ABSOLUTE_VALUE (Third Rule)\n");
         }
