@@ -155,7 +155,14 @@ void handleClosedAbsoluteValue(){
     while (peekChar(operatorStack) != '{') {
         computeStack(&operatorStack, &operandStack);
     }
-    pushNum(&operandStack, -1 * popNum(&operandStack));
+    double beforeAbsoluteValued = popNum(&operandStack);
+    if(beforeAbsoluteValued >= 0){
+        pushNum(&operandStack, beforeAbsoluteValued);
+    }
+    else {
+        pushNum(&operandStack, -1 * beforeAbsoluteValued);
+    }
+    //pushNum(&operandStack, -1 * beforeAbsoluteValued);
     popChar(&operatorStack);
 }
 
